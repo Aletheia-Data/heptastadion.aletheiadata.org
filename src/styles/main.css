@@ -1,0 +1,37 @@
+
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Inconsolata', 'Monaco', monospace;
+	overflow: hidden;
+	margin: 0;
+	color: #a0a2ae;
+	background: #282b2f;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+
+.logo-aletheia{
+	position: fixed;
+	z-index:11;
+	cursor:pointer; 
+	bottom: 30px;
+	left: 140px;
+}
+
+@media all and (max-width: 768px) {
+	.logo-aletheia{
+	    position: fixed;
+		z-index: 99999;
+		cursor: pointer;
+		top: 25px;
+		left: 80%;
+		width: 140px;
+		height: 50px;
+	}
+}
