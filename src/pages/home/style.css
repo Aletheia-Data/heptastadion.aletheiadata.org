@@ -1,3 +1,72 @@
+.home b{
+	color: #fff;
+}
+
+.home .content-page{
+	padding: 50px 20%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.home .content-page.faq{
+	background-color: beige;
+	color: #22295f;
+}
+
+.home .content-page.faq a{
+	color: #22295f;
+	font-weight: 800;
+}
+
+.home .content-page.listing{
+	color: #fff;
+}
+
+.home .content-intro{
+	width: 100%;
+}
+
+.home .content-intro h1{
+	text-align: center;
+	margin-top: 0px;
+	margin-bottom: 60px;
+}
+
+.home .content{
+	height: 100%;
+}
+
+.home .card{
+	height: 100%;
+	color: #454545;
+}
+
+.home .latest{
+	padding: 60px 10%;
+}
+
+.home .card b, .home .card a{
+	color: #454545;
+}
+
+.home .main-wrap {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	height: 100vh;
+	background-color: #22295f;
+	background-image: none;
+	/*background-image: url(/assets/img/bg.svg);*/
+	background-repeat: no-repeat;
+	background-position: 50% 10em;
+	background-size: 75% auto;
+	overflow: auto;
+}
+
 .listing-links::after {
 	display: none;
 }

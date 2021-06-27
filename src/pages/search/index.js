@@ -12,7 +12,7 @@ import {
 import '../../styles/main.css';
 import './style.css';
 
-export default function MINERD() {
+export default function Search() {
 
   let [miniSearch, setMiniSearch] = useState("");
 
@@ -66,7 +66,7 @@ export default function MINERD() {
             <div className="records-error"></div>
             <div className="records-meta">
               <div>
-                <b>Source: </b>
+                <b>File: </b>
                 <span>${ file }</span>
               </div>
               <br />
@@ -201,6 +201,10 @@ export default function MINERD() {
           value = `RD$ ${ numeral(value).format('0,0.00') }`
           key = 'Sueldo bruto'
           break;
+        case 'sueldo':
+          value = `RD$ ${ numeral(value).format('0,0.00') }`
+          key = 'Sueldo'
+          break;
         case 'terms':
           skip=true
           value = 0;
@@ -254,7 +258,7 @@ export default function MINERD() {
                           })
                         }
                     </ul></pre>
-                    <button className="btn">{ `RD$ ${ numeral(result['Sueldo bruto'] || result['SUELDO BRUTO']).format('0,0.00') }` }</button>
+                    <button className="btn">{ `RD$ ${ numeral(result['Sueldo bruto'] || result['SUELDO BRUTO'] || result['SUELDO']).format('0,0.00') }` }</button>
                 </div>
               </div>
           </div>

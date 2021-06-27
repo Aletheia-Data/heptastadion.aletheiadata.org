@@ -20,8 +20,7 @@
     flex: 1;
     width: 100%;
     display: flex;
-    overflow: auto;
-	padding-top: 30px;
+		padding-top: 30px;
 }
 
 .content-page .filters{  
@@ -125,6 +124,7 @@ pre {
 	font-size: 16px;
 	line-height: 1.4rem;
 	list-style: 'none';
+	overflow: auto;
 }
 
 .progress-container {

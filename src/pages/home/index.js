@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import MiniSearch from 'minisearch';
 import Papa from 'papaparse'
@@ -17,11 +17,8 @@ export default function Home() {
 
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
-  const [resultsPerPage, setResultsPerPage] = useState([]);
-  let [page, setPage] = useState(1);
-  let [perPage, setPerPage] = useState(20);
-  let [pageCount, setPageCount] = useState(1);
-  let [noResult, setNoResult] = useState(false);
+
+  let [latest, setLatest] = useState([]);
 
   let history = useHistory();
 
@@ -33,77 +30,21 @@ export default function Home() {
       history.push(`_search?url=${search}`);
     }
   }
-  
-  const isServiceField = (key) =>{
-    switch (key) {
-      case 'highlight':
-        return true
-      case '_index':
-        return true
-      case '_type':
-        return true
-      case '_doc':
-        return true
-      case '_id':
-        return true
-      case '_score':
-        return true
-      case '_click_id':
-        return true
-      default:
-        return false
-    }
+
+  const getListing = () =>{
+    return fetch('http://admin.aletheiadata.org/alexandrias')
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      if (data.length > 0){
+        setLatest(data);
+      }
+    });
   }
 
-  const getLabelInfo = (key, value) =>{
-    //console.log(key, value);
-    if (!isServiceField(key)){
-      let skip = false;
-      let isLink = false;
-      switch (key) {
-        case 'id':
-          skip=true
-          value = 0;
-          key = 'id'
-          break;
-        case 'ANO':
-          key = 'Año'
-          break;
-        case 'Funci�n':
-          key = 'Función'
-          break;
-        case 'A�o':
-          key = 'Año'
-          break;
-        case 'terms':
-          skip=true
-          value = 0;
-          key = 'terms'
-          break;
-        case 'Estatus':
-          skip=true
-          value = 0;
-          key = 'Estatus'
-          break;
-        case 'score':
-          skip=true
-          value = 0;
-          key = 'score'
-          break;
-        case 'match':
-          skip=true
-          value = 0;
-          key = 'Match'
-          break;
-        default:
-      }
-      // console.log(value);
-      if (!skip){
-        if (isLink) return <li key={key} style={{ display: 'flex',alignItems: 'flex-start', whiteSpace: 'break-spaces' }}><b>{ key }:</b> <p style={{ margin: 0,marginLeft: 10 }}><a href={value} target='_blank' >{ 'Portal' }</a></p></li>;
-        return <li key={key} style={{ display: 'flex',alignItems: 'flex-start', whiteSpace: 'break-spaces' }}><b>{ key }:</b> <p style={{ margin: 0,marginLeft: 10 }}>{ value }</p></li>;
-      }
-    }
-  }
+  useEffect(()=>{
+    getListing();
+  }, [])
 
   const Card = (result, i) =>{
     return(
@@ -111,41 +52,27 @@ export default function Home() {
           <div className="courses-container col-xs-6">
               <div className="course">
                   <div className="course-preview">
-                      <h6>{ result.Estatus }</h6>
-                      <h2>{ result.Nombre }</h2>
+                      <h6>{ result.published_at }</h6>
+                      <h2>{ result.title }</h2>
                   </div>
                   <div className="course-info">
-                    <h6>{ result.Departamento }</h6>
+                    <h6>{ result.description }</h6>
                     <pre>
                       <ul>
-                        {
-                          Object.keys(result).map((k, v) => {
-                            let val = result[k];
-                            let label = getLabelInfo(k,val);
-                            return label
-                          })
-                        }
-                    </ul></pre>
-                    <button className="btn">RD$ { numeral(result['Sueldo Bruto']).format('0,0.00') }</button>
-                </div>
-              </div>
-          </div>
-      </div>
-    )
-  }
-
-  const EmptyCard = () =>{
-    return(
-      <div className="card">
-          <div className="courses-container col-xs-6">
-              <div className="course">
-                  <div className="course-preview">
-                      <h6>{ 'No Found' }</h6>
-                      <h2>{ 'Not Found' }</h2>
-                  </div>
-                  <div className="course-info">
-                    <h6>{ 'Not found' }</h6>
-                    <button className="btn">not found</button>
+                        <li style={{ display: 'flex',alignItems: 'flex-start', whiteSpace: 'break-spaces' }}>
+                          <b>{ 'Fuente: ' }</b>
+                          <a href={result.source_url} target="_blank">
+                            <p style={{ margin: 0,marginLeft: 10 }}>{ result.source_url }</p>
+                          </a>
+                        </li>
+                        <li style={{ display: 'flex',alignItems: 'flex-start', whiteSpace: 'break-spaces' }}>
+                          <b>{ 'Status: ' }</b><p style={{ margin: 0,marginLeft: 10 }}>{ result.status }</p>
+                        </li>
+                      </ul>
+                    </pre>
+                    <button className="btn" onClick={()=>history.push(`_search?url=${result.cid}.ipfs.dweb.link`)}>
+                      <p style={{ margin: 0 }}>{ 'CONSULTAR' }</p>
+                    </button>
                 </div>
               </div>
           </div>
@@ -159,97 +86,7 @@ export default function Home() {
     setSearch(value);
     if (!value){
       setResults([])
-      setResultsPerPage([])
-      setPage(1);
-      setPerPage(20);
     }
-  }
-
-  const handlePageClick = (data) =>{
-    let selected = data.selected;
-    let offset = Math.ceil(selected * perPage);
-
-    this.setState({ offset: offset }, () => {
-      this.loadCommentsFromServer();
-    });
-  };
-
-  const prevPage = () =>
-  {
-      if (page > 1) {
-        page--;
-        changePage(page, results);
-      }
-  }
-
-  const nextPage = () =>
-  {
-      if (page < numPages()) {
-        page++;
-        changePage(page, results);
-      }
-  }
-
-  const changePage = (page, results) =>
-  {
-      // console.log('changing page: ', page);
-
-      var btn_next = document.getElementById("btn_next");
-      var btn_prev = document.getElementById("btn_prev");
-      
-      // Validate page
-      if (page < 1) page = 1;
-      if (page > numPages()) page = numPages();
-
-      // console.log(results);
-      let res = [];
-      for (var i = (page-1) * perPage; i < (page * perPage); i++) {
-        // console.log('i: ', i);
-        // console.log('from: ', (page-1) * perPage);
-        // console.log('to: ', page * perPage);
-        // console.log('res: ', results[Math.abs(i)]);
-        let item = results[Math.abs(i)];
-        if (item){
-          res.push(item);
-        }
-      }
-      
-      // setResults(results)
-      console.log(res);
-      console.log(page);
-      console.log(results.length);
-      setResultsPerPage(res);
-      
-      if (page == 1) {
-          btn_prev.style.visibility = "hidden";
-      } else {
-          btn_prev.style.visibility = "visible";
-      }
-
-      if (page == numPages()) {
-          btn_next.style.visibility = "hidden";
-      } else {
-          btn_next.style.visibility = "visible";
-      }
-
-      // set new page
-      if (page > 0){
-        setPage(page);
-        setPageCount(numPages())
-      } else {
-        resetSearch();
-      }
-  }
-
-  const resetSearch = () =>
-  {
-    setPage(1);
-    setPageCount(1)
-  }
-
-  const numPages = () =>
-  {
-      return Math.ceil(results.length / perPage);
   }
 
   return (
@@ -334,19 +171,43 @@ export default function Home() {
               </div>
             </div>
             <div className="content-page">
-              <div className="filters"></div>
-              <div className="results">
-                {
-                  resultsPerPage.length > 0 &&
-                  resultsPerPage.map((res, i) => {
-                    return Card(res, i);
-                  })
-                }
-                {
-                  resultsPerPage.length == 0 &&
-                  noResult &&
-                  EmptyCard()
-                }
+              <div className="content-intro">
+                <h1>Heptastadion, el puente hacia Alexandrià<br /></h1>
+                <h3>La <b>Biblioteca de Alexandría</b> es un espacio virtual diseñado para preservar y hacer crecer el conocimiento de la humanidad. Haciendo que el Web sea más resistente y abierto. 
+                    <br /><br />
+                    Este servicio tiene como tarea guardar una copia de la información que viene emitida por parte del estado hacerla “unstoppable” atrevés de la tecnología blockchain. 
+                    <br /><br />
+                    Todos los archivos seràn disponibles en <a href="https://ipfs.io/" target="_blank">IPFS (Interplanetary File System)</a> en modo que sean incensurables, inmutables, y disponible en todo momento.
+                    <br /><br />
+                    Esta información estará distribuida P2P y no será posible cancelarla o removerla de la red.</h3>
+              </div>
+            </div>
+            <div className="content-page faq">
+              <div className="content-intro">
+                <h4>FAQ</h4>
+                <h3>¿Que hacer con este tool?</h3>
+                Bueno, puedes buscar las botellas del gobierno, puedes consultar el gasto que se hace con tus taxes, tambien nos puedes simplemente <a href="https://www.buymeacoffee.com/aletheiadata" target="_blank">ofrecer una cerveza</a> 🍻
+                <br /><br />
+                <h3>¿Por que usar una solución descentralizada?</h3>
+                Apoyarnos sobre una plataforma descentralizada nos brinda la garantía que la información no va a ser modificada, hackeada, o corrompida. También nos brinda la mejor opción para mantener la información siempre disponible (no hay servers que provisionar).
+                <br /><br />
+                <h3>¿A que te refieres con hacer la información 'unstoppable'?</h3>
+                Unstoppable o decentralized information quiere decir que la información no está ubicada en una localidad fija (o server) sino que está distribuido en la red atrevés de IPFS, no se puede modificar ya que habría que descriptar los bloques del blockchain y te aseguro no es tarea fácil, y ultimo está siempre disponible ya que vive en cada uno de nuestros computadores.
+              </div>
+            </div>
+            <div className="content-page listing">
+              <div className="content-intro">
+                <h3>Latest Uploads</h3>
+                El acceso a la informacion es vital para una democracia saludable. Por eso en Aletheia estamos comprometidos con hacer el flujo de la información fácil, rápida, y disponible en todo momento.
+                <br /><br />
+                <div className="latest">
+                  {
+                    latest &&
+                    latest.map((item, i) => {
+                      return Card(item, i);
+                    })
+                  }
+                </div>
               </div>
             </div>
           </div>
