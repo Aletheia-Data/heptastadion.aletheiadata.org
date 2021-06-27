@@ -251,12 +251,23 @@ export default function Search() {
       <div className="card" key={`card_${i}}`}>
           <div className="courses-container col-xs-6">
               <div className="course">
-                  <div className="course-preview">
-                      <h6>{ result.Estatus || result.ESTATUS }</h6>
-                      <h2>{ result.Nombre || result.NOMBRE }</h2>
-                  </div>
+                  {
+                    result &&
+                    <div className="course-preview">
+                        <h6>{ 
+                          result.Estatus || 
+                          result.ESTATUS 
+                        }</h6>
+                        <h2>{ 
+                          result.Nombre || 
+                          result.NOMBRE 
+                        }</h2>
+                    </div>
+                  }
                   <div className="course-info">
-                    <h6>{ result.Departamento }</h6>
+                    <h6>{ 
+                      result.Departamento 
+                    }</h6>
                     <pre>
                       <ul>
                         {
@@ -267,7 +278,13 @@ export default function Search() {
                           })
                         }
                     </ul></pre>
-                    <button className="btn">{ `RD$ ${ numeral(result['Sueldo Bruto'] || result['Sueldo bruto'] || result['SUELDO BRUTO'] || result['SUELDO']).format('0,0.00') }` }</button>
+                    <button className="btn">{ `RD$ ${ numeral(
+                      result['Sueldo Bruto'] || 
+                      result['Sueldo bruto'] || 
+                      result['SUELDO BRUTO'] || 
+                      result['SUELDO'] ||
+                      result['TOTAL']
+                    ).format('0,0.00') }` }</button>
                 </div>
               </div>
           </div>

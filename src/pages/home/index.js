@@ -175,25 +175,25 @@ export default function Home() {
             <div className="content-page">
               <div className="content-intro">
                 <h1><b>Heptastadion</b>: el puente hacia Alexandrià<br /></h1>
-                <h3>La <b>Biblioteca de Alexandría</b> es un espacio virtual diseñado para preservar y hacer crecer el conocimiento de la humanidad, haciendo el Web más resistente y abierto. 
+                <h3>La <b>Biblioteca de Alexandría</b> es un espacio virtual diseñado para preservar y hacer crecer el conocimiento de la humanidad, haciendo la Web más resistente y abierto. 
                     <br /><br />
-                    Este servicio tiene como tarea registrar una copia de toda información publica emitida por las autoridades y hacerlas “<b>unstoppable</b>” atrevés de la tecnología blockchain. 
+                    Este servicio tiene como tarea registrar una copia de toda información publica emitida por las autoridades y hacerlas “<b>unstoppable</b>” a trevés de la tecnología blockchain. 
                     <br /><br />
-                    Todos los archivos seràn distribuidos por <a href="https://ipfs.io/" target="_blank">IPFS (Interplanetary File System)</a> en modo que sean incensurables, inmutables, y disponible en todo momento.
+                    Todos los archivos seràn distribuidos por <a href="https://ipfs.io/" target="_blank">IPFS (Interplanetary File System)</a> que los harà incensurables, inmutables, y disponible en todo momento.
                     <br /><br />
-                    Esta información estará distribuida <b>P2P</b> y no será posible <b>cancelarla</b> o <b>removerla</b> de la red.</h3>
+                    Una vez en la red <b>P2P</b> no será posible <b>cancelar</b> o <b>remover</b> la información de la red.</h3>
               </div>
             </div>
             <div className="content-page faq">
               <div className="content-intro">
                 <h4>FAQ</h4>
-                <h3>¿Que hacer con este tool?</h3>
+                <h3>¿Qué hacer con este tool?</h3>
                 Bueno, puedes buscar las botellas del gobierno, puedes consultar el gasto que se hace con tus taxes, tambien nos puedes simplemente <a href="https://www.buymeacoffee.com/aletheiadata" target="_blank">ofrecer una cerveza</a> 🍻
                 <br /><br />
-                <h3>¿Por que usar una solución descentralizada?</h3>
+                <h3>¿Por qué usar una solución descentralizada?</h3>
                 Apoyarnos sobre una plataforma descentralizada nos brinda la garantía que la información no va a ser modificada, hackeada, o corrompida. También nos brinda la mejor opción para mantener la información siempre disponible (no hay servers que provisionar).
                 <br /><br />
-                <h3>¿A que te refieres con hacer la información 'unstoppable'?</h3>
+                <h3>¿A qué te refieres con hacer la información 'unstoppable'?</h3>
                 Unstoppable o decentralized information quiere decir que la información no está ubicada en una localidad fija (o server) sino que está distribuido en la red atrevés de IPFS, no se puede modificar ya que habría que descriptar los bloques del blockchain y te aseguro no es tarea fácil, y ultimo está siempre disponible ya que vive en cada uno de nuestros computadores.
               </div>
             </div>
