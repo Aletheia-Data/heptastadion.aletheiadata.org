@@ -26,6 +26,9 @@
 .content-page .filters{  
     width: 25%;
 		color: #fff;
+		max-height: 600px;
+    overflow: auto;
+		position: fixed;
 }
 
 .content-page .results{  
@@ -36,6 +39,7 @@
     overflow: auto;
 		flex-wrap: wrap;
     display: flex;
+		margin-left: 25%;
 }
 
 .course {
@@ -157,49 +161,6 @@ pre {
 	font-size: 10px;
 	opacity: 0.6;
 	letter-spacing: 1px;
-}
-
-
-@media all and (max-width: 1024px) {
-	.course-info pre ul{
-		margin-bottom: 30px;		
-	}
-}
-
-
-@media all and (max-width: 768px) {
-	.course-info pre ul{
-		font-size: 0.7rem;
-		line-height: 1rem;
-	}
-}
-
-@media screen and (max-width: 480px) {
-
-	.floating-btn {
-		right: 10px;
-	}
-
-	.logo-aletheia{
-	    position: fixed;
-		z-index: 99999;
-		cursor: pointer;
-		top: 25px;
-		left: 65%;
-		width: 140px;
-		height: 50px;
-	}
-	.course{
-		flex-direction: column;
-	}
-	.course-preview, .course-info{
-		width: 100% !important;
-	}
-	.course-info pre ul{
-		font-size: 0.8rem;
-		line-height: 1.1rem;
-		padding-left: 0;
-	}
 }
 
 /* Layout for search container */
@@ -519,6 +480,51 @@ pre {
 	}
 }
 
+
+@media all and (max-width: 1024px) {
+	.course-info pre ul{
+		margin-bottom: 30px;		
+	}
+	.content-page {
+		flex-direction: column;
+	}
+	.content-page .filters {
+    width: 90%;
+		height: 200px;
+    margin-bottom: 40px;
+		position: relative;
+		padding-left: 20px;
+	}
+	.content-page .results {
+		margin-left: 0;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 110px;
+    overflow: auto;
+    flex-wrap: wrap;
+    display: flex;
+	}
+	.course{
+		flex-direction: column;
+	}
+	.course-preview{
+		width: 100%;
+	}
+	.course-info {
+    padding: 30px;
+    position: relative;
+    width: 100%;
+	}
+}
+
+
+@media all and (max-width: 768px) {
+	.course-info pre ul{
+		font-size: 0.7rem;
+		line-height: 1rem;
+	}
+}
+
 @media all and (max-width: 641px) {
 	.search__input {
 		font-size: 1.5rem;
@@ -528,10 +534,36 @@ pre {
 	}
 }
 
-@media all and (max-width: 425px) {
-	.search__input {
-		font-size: 1rem;
+
+@media screen and (max-width: 480px) {
+
+	.floating-btn {
+		right: 10px;
 	}
+
+	.logo-aletheia{
+	    position: fixed;
+		z-index: 99999;
+		cursor: pointer;
+		top: 25px;
+		left: 65%;
+		width: 140px;
+		height: 50px;
+	}
+	.course{
+		flex-direction: column;
+	}
+	.course-preview, .course-info{
+		width: 100% !important;
+	}
+	.course-info pre ul{
+		font-size: 0.8rem;
+		line-height: 1.1rem;
+		padding-left: 0;
+	}
+}
+
+@media all and (max-width: 425px) {
 	.js .content .search .search__form {
     margin-top: 200px;
 	}
@@ -722,18 +754,7 @@ a,
 
 
 @media screen and (max-width: 40em) {
-	.listing-header {
-		display: block;
-		padding: 4em 1em 0;
-		text-align: center;
-	}
-	.listing-header__side {
-		margin: 0 auto;
-	}
-	.listing-links {
-		font-size: 0.85em;
-		margin: 0 auto;
-	}
+	
 	.search-wrap {
 		font-size: 0.85em;
 		position: absolute;

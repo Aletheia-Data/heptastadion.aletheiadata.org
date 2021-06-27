@@ -283,6 +283,7 @@ export default function Search() {
                       result['Sueldo bruto'] || 
                       result['SUELDO BRUTO'] || 
                       result['SUELDO'] ||
+                      result['Sueldo Bruto (RD$)'] ||
                       result['TOTAL']
                     ).format('0,0.00') }` }</button>
                 </div>
