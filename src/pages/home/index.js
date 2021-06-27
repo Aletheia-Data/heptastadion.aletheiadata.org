@@ -33,7 +33,8 @@ export default function Home() {
   }
 
   const getListing = () =>{
-    return fetch('http://admin.aletheiadata.org/alexandrias')
+    let endpoint_admin = 'https://aletheia-alexandria.herokuapp.com';
+    return fetch(`${endpoint_admin}/alexandrias`)
     .then(response => response.json())
     .then(data => {
       console.log(data)
