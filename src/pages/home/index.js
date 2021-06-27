@@ -174,14 +174,14 @@ export default function Home() {
             </div>
             <div className="content-page">
               <div className="content-intro">
-                <h1>Heptastadion, el puente hacia Alexandrià<br /></h1>
-                <h3>La <b>Biblioteca de Alexandría</b> es un espacio virtual diseñado para preservar y hacer crecer el conocimiento de la humanidad. Haciendo que el Web sea más resistente y abierto. 
+                <h1><b>Heptastadion</b>: el puente hacia Alexandrià<br /></h1>
+                <h3>La <b>Biblioteca de Alexandría</b> es un espacio virtual diseñado para preservar y hacer crecer el conocimiento de la humanidad, haciendo el Web más resistente y abierto. 
                     <br /><br />
-                    Este servicio tiene como tarea guardar una copia de la información que viene emitida por parte del estado hacerla “unstoppable” atrevés de la tecnología blockchain. 
+                    Este servicio tiene como tarea registrar una copia de toda información publica emitida por las autoridades y hacerlas “<b>unstoppable</b>” atrevés de la tecnología blockchain. 
                     <br /><br />
-                    Todos los archivos seràn disponibles en <a href="https://ipfs.io/" target="_blank">IPFS (Interplanetary File System)</a> en modo que sean incensurables, inmutables, y disponible en todo momento.
+                    Todos los archivos seràn distribuidos por <a href="https://ipfs.io/" target="_blank">IPFS (Interplanetary File System)</a> en modo que sean incensurables, inmutables, y disponible en todo momento.
                     <br /><br />
-                    Esta información estará distribuida P2P y no será posible cancelarla o removerla de la red.</h3>
+                    Esta información estará distribuida <b>P2P</b> y no será posible <b>cancelarla</b> o <b>removerla</b> de la red.</h3>
               </div>
             </div>
             <div className="content-page faq">

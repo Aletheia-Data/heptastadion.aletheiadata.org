@@ -21,12 +21,21 @@ export default function Search() {
   const file = urlParams.get('url');
   const cors_anywhere = 'https://cors-aletheiadata.herokuapp.com';
 
-  var response_index = '';
+  const protocol = file.includes("ipfs");;
 
-  const csv = `${cors_anywhere}/${file}`;
+  let url = '';
+  if (protocol){
+    url = `https://${file}`
+  } else {
+    url = `${cors_anywhere}/${file}`
+  }
+
+  
+  var response_index = '';
+  
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
-    const csvData = Papa.parse(csv, {
+    const csvData = Papa.parse(url, {
       download: true,
       header: true,
       complete: response => {
@@ -258,7 +267,7 @@ export default function Search() {
                           })
                         }
                     </ul></pre>
-                    <button className="btn">{ `RD$ ${ numeral(result['Sueldo bruto'] || result['SUELDO BRUTO'] || result['SUELDO']).format('0,0.00') }` }</button>
+                    <button className="btn">{ `RD$ ${ numeral(result['Sueldo Bruto'] || result['Sueldo bruto'] || result['SUELDO BRUTO'] || result['SUELDO']).format('0,0.00') }` }</button>
                 </div>
               </div>
           </div>
