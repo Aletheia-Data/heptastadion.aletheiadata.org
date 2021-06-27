@@ -70,3 +70,50 @@
 .listing-links::after {
 	display: none;
 }
+
+@media all and (max-width: 1440px) {
+	.home .latest {
+    padding: 60px 0;
+	}	
+}
+
+@media all and (max-width: 1024px) {
+	.home .content-page {
+    padding: 50px 10%;
+	}
+}
+
+@media all and (max-width: 1024px) {
+	.listing-header {
+    padding: 2.5em 2.75em 3.5em 1.5em;
+	}
+}
+
+@media all and (max-width: 768px) {
+	.listing-header {
+		padding: 4em 0 7rem 0;
+	}
+	.js .content .search .search__form {
+		margin: 0 !important;
+    position: absolute;
+    right: 40px;
+    top: 46px;
+    width: 50% !important;
+	}
+	.home .content-page {
+    padding: 30px 5%;
+	}
+}
+
+@media all and (max-width: 640px) {
+	.listing-header {
+		padding: 4em 0 7rem 0;
+	}
+	.js .content .search .search__form {
+    width: 100%;
+    padding: 0 5%;
+	}
+	.home .content-page {
+    padding: 30px 5%;
+	}
+}

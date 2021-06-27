@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import MiniSearch from 'minisearch';
-import Papa from 'papaparse'
-import numeral from 'numeral';
+import moment from 'moment';
+import 'moment/locale/es';
 
 import {
   BrowserRouter as Router,
@@ -10,6 +9,8 @@ import {
 } from "react-router-dom";
 import '../../styles/main.css';
 import './style.css';
+
+moment.locale('es');
 
 export default function Home() {
 
@@ -52,7 +53,7 @@ export default function Home() {
           <div className="courses-container col-xs-6">
               <div className="course">
                   <div className="course-preview">
-                      <h6>{ result.published_at }</h6>
+                      <h6>{ moment(result.published_at).format('MMMM Do YYYY') }</h6>
                       <h2>{ result.title }</h2>
                   </div>
                   <div className="course-info">
