@@ -306,7 +306,7 @@ export default function Home() {
               {/* <a className="codrops-icon codrops-icon--prev" href="" title="Previous Demo"><svg className="icon icon--arrow"><use xlinkHref="#icon-arrow"></use></svg></a> */}
               <a className="codrops-icon codrops-icon--drop" href="" title="Back to the article"><img style={{ width: '25px' }} src="/assets/img/logo.svg"></img></a>
             </div>
-            <h1 className="listing-header__title">Heptastadion Listing</h1>
+            <h1 className="listing-header__title">Heptastadion (HEP)</h1>
             <div className="search-wrap hide">
               <button id="btn-search" onClick={()=>setOpenSearch(true)} className="btn btn--search"><svg className="icon icon--search"><use xlinkHref="#icon-search"></use></svg></button>
             </div>

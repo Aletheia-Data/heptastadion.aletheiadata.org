@@ -19,10 +19,11 @@ export default function MINERD() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const file = urlParams.get('url');
+  const cors_anywhere = 'https://cors-aletheiadata.herokuapp.com';
 
   var response_index = '';
 
-  const csv = `${file}`;
+  const csv = `${cors_anywhere}/${file}`;
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
     const csvData = Papa.parse(csv, {
@@ -64,6 +65,11 @@ export default function MINERD() {
             <div className="records-imported"></div>
             <div className="records-error"></div>
             <div className="records-meta">
+              <div>
+                <b>Source: </b>
+                <span>${ file }</span>
+              </div>
+              <br />
               <div>
                 <b>Delimiter: </b>
                 <span>"${ response_index.meta.delimiter }"</span>
@@ -174,30 +180,34 @@ export default function MINERD() {
     if (!isServiceField(key)){
       let skip = false;
       let isLink = false;
+      // make minuscule
+      key = key.toLowerCase();
       switch (key) {
         case 'id':
           skip=true
           value = 0;
           key = 'id'
           break;
-        case 'ANO':
+        case 'ano':
           key = 'Año'
           break;
-        case 'Funci�n':
+        case 'funci�n':
           key = 'Función'
           break;
-        case 'A�o':
+        case 'a�o':
           key = 'Año'
+          break;
+        case 'sueldo bruto':
+          value = `RD$ ${ numeral(value).format('0,0.00') }`
+          key = 'Sueldo bruto'
           break;
         case 'terms':
           skip=true
           value = 0;
           key = 'terms'
           break;
-        case 'Estatus':
-          skip=true
-          value = 0;
-          key = 'Estatus'
+        case 'estatus':
+          key = 'estatus'
           break;
         case 'score':
           skip=true
@@ -207,11 +217,13 @@ export default function MINERD() {
         case 'match':
           skip=true
           value = 0;
-          key = 'Match'
+          key = 'match'
           break;
         default:
       }
       // console.log(value);
+      // make capitalized
+      key = key.charAt(0).toUpperCase() + key.slice(1);
       if (!skip){
         if (isLink) return <li key={key} style={{ display: 'flex',alignItems: 'flex-start', whiteSpace: 'break-spaces' }}><b>{ key }:</b> <p style={{ margin: 0,marginLeft: 10 }}><a href={value} target='_blank' >{ 'Portal' }</a></p></li>;
         return <li key={key} style={{ display: 'flex',alignItems: 'flex-start', whiteSpace: 'break-spaces' }}><b>{ key }:</b> <p style={{ margin: 0,marginLeft: 10 }}>{ value }</p></li>;
@@ -219,14 +231,16 @@ export default function MINERD() {
     }
   }
 
+
+
   const Card = (result, i) =>{
     return(
       <div className="card" key={`card_${i}}`}>
           <div className="courses-container col-xs-6">
               <div className="course">
                   <div className="course-preview">
-                      <h6>{ result.Estatus }</h6>
-                      <h2>{ result.Nombre }</h2>
+                      <h6>{ result.Estatus || result.ESTATUS }</h6>
+                      <h2>{ result.Nombre || result.NOMBRE }</h2>
                   </div>
                   <div className="course-info">
                     <h6>{ result.Departamento }</h6>
@@ -240,7 +254,7 @@ export default function MINERD() {
                           })
                         }
                     </ul></pre>
-                    <button className="btn">RD$ { numeral(result['Sueldo Bruto']).format('0,0.00') }</button>
+                    <button className="btn">{ `RD$ ${ numeral(result['Sueldo bruto'] || result['SUELDO BRUTO']).format('0,0.00') }` }</button>
                 </div>
               </div>
           </div>
@@ -422,7 +436,6 @@ export default function MINERD() {
               <Link className="codrops-icon codrops-icon--prev" to="/"><svg className="icon icon--arrow"><use xlinkHref="#icon-arrow"></use></svg></Link>
               <Link className="codrops-icon codrops-icon--drop" to="/"><img style={{ width: '25px' }} src="/assets/img/logo.svg"></img></Link> 
             </div>
-            <h1 className="listing-header__title">Heptastadion</h1>
             <div className="search-wrap hide">
               <button id="btn-search" onClick={()=>setOpenSearch(true)} className="btn btn--search"><svg className="icon icon--search"><use xlinkHref="#icon-search"></use></svg></button>
             </div>
