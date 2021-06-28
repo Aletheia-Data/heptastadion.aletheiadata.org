@@ -103,7 +103,8 @@ pre {
 .course-info {
 	padding: 30px;
 	position: relative;
-	width: 70%;
+	width: 100%;
+	max-width: 645px;
 }
 
 .course-info .btn {

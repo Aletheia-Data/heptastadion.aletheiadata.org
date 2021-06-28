@@ -274,7 +274,11 @@ export default function Search() {
           <div className="courses-container col-xs-6">
               <div className="course">
                   {
-                    result &&
+                    result && (
+                    result.Estatus || 
+                    result.ESTATUS ||
+                    result['TIPO EMPLEADO'] ||
+                    result['MEDIO'] ) &&
                     <div className="course-preview">
                         <h6>{ 
                           result.Estatus || 
