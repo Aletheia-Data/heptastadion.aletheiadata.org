@@ -29,7 +29,6 @@ export default function Search() {
   } else {
     url = `${cors_anywhere}/${file}`
   }
-
   
   var response_index = '';
   
@@ -37,6 +36,7 @@ export default function Search() {
   useEffect(() => {
     const csvData = Papa.parse(url, {
       download: true,
+      encoding: "ISO-8859-1",
       header: true,
       complete: response => {
         
@@ -214,6 +214,14 @@ export default function Search() {
           value = `RD$ ${ numeral(value).format('0,0.00') }`
           key = 'Sueldo'
           break;
+        case 'sueldo base':
+          value = `RD$ ${ numeral(value).format('0,0.00') }`
+          key = 'Sueldo Base'
+          break;
+        case 'monto':
+          value = `RD$ ${ numeral(value).format('0,0.00') }`
+          key = 'Monto'
+          break;
         case 'terms':
           skip=true
           value = 0;
@@ -244,6 +252,20 @@ export default function Search() {
     }
   }
 
+  /**
+   * 
+    APELLIDOS: "OGANDO BATISTA"
+    DEFINICION CARGO: "SUPERVISOR SOCIAL"
+    LUGAR DESIGNADO: "OFIC. PROV. MARIA TRINIDAD SANCHEZ"
+    MUNICIPIO: "NAGUA"
+    NOMBRES: "MARIO JORGE"
+    PERIODO: "2018"
+    PERIODO MES: "FEBRERO"
+    PROVINCIA: "MARIA TRINIDAD SANCHEZ"
+    REGION: "REGION 3"
+    SUELDO BASE: "18150"
+    TIPO EMPLEADO: "FIJO"
+   */
 
 
   const Card = (result, i) =>{
@@ -256,11 +278,14 @@ export default function Search() {
                     <div className="course-preview">
                         <h6>{ 
                           result.Estatus || 
-                          result.ESTATUS 
+                          result.ESTATUS ||
+                          result['TIPO EMPLEADO'] ||
+                          result['MEDIO']
                         }</h6>
                         <h2>{ 
                           result.Nombre || 
-                          result.NOMBRE 
+                          result.NOMBRE ||
+                          result['NOMBRES'] + ' ' + result['APELLIDOS']
                         }</h2>
                     </div>
                   }
@@ -282,6 +307,8 @@ export default function Search() {
                       result['Sueldo Bruto'] || 
                       result['Sueldo bruto'] || 
                       result['SUELDO BRUTO'] || 
+                      result['SUELDO BASE'] || 
+                      result['MONTO'] || 
                       result['SUELDO'] ||
                       result['Sueldo Bruto (RD$)'] ||
                       result['TOTAL']

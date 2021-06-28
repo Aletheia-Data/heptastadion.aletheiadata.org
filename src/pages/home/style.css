@@ -45,6 +45,9 @@
 
 .home .latest{
 	padding: 60px 10%;
+	max-height: 1000px;
+  overflow: auto;
+	border-bottom: 2px solid #fff;
 }
 
 .home .card b, .home .card a{
