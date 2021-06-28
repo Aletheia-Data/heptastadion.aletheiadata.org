@@ -2,6 +2,29 @@
 	color: #fff;
 }
 
+.home .github-corner svg{
+	z-index: 1;
+}
+
+.home .github-corner:hover .octo-arm {
+	animation: octocat-wave 560ms ease-in-out
+}
+
+@keyframes octocat-wave {
+	0%,
+	100% {
+		transform: rotate(0)
+	}
+	20%,
+	60% {
+		transform: rotate(-25deg)
+	}
+	40%,
+	80% {
+		transform: rotate(10deg)
+	}
+}
+
 .home .content-page{
 	padding: 50px 20%;
 	width: 100%;
@@ -22,6 +45,11 @@
 
 .home .content-page.listing{
 	color: #fff;
+}
+
+.home .copyright{
+	text-align: center;
+	padding: 20px;
 }
 
 .home .content-intro{

@@ -273,26 +273,19 @@ export default function Search() {
       <div className="card" key={`card_${i}}`}>
           <div className="courses-container col-xs-6">
               <div className="course">
-                  {
-                    result && (
-                    result.Estatus || 
-                    result.ESTATUS ||
-                    result['TIPO EMPLEADO'] ||
-                    result['MEDIO'] ) &&
-                    <div className="course-preview">
-                        <h6>{ 
-                          result.Estatus || 
-                          result.ESTATUS ||
-                          result['TIPO EMPLEADO'] ||
-                          result['MEDIO']
-                        }</h6>
-                        <h2>{ 
-                          result.Nombre || 
-                          result.NOMBRE ||
-                          result['NOMBRES'] + ' ' + result['APELLIDOS']
-                        }</h2>
-                    </div>
-                  }
+                  <div className="course-preview">
+                    <h6>{ 
+                      result.Estatus || 
+                      result.ESTATUS ||
+                      result['TIPO EMPLEADO'] ||
+                      result['MEDIO']
+                    }</h6>
+                    <h2>{ 
+                      result.Nombre || 
+                      result.NOMBRE ||
+                      result['NOMBRES'] ? result['NOMBRES'] + ' ' + result['APELLIDOS'] : ''
+                    }</h2>
+                  </div>
                   <div className="course-info">
                     <h6>{ 
                       result.Departamento 
