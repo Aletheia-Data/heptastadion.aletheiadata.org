@@ -33,6 +33,29 @@
 	align-items: center;
 }
 
+.home .logo{
+	display: flex;
+	align-items: center;
+}
+
+.home .search__form {
+	margin: 0;
+}
+
+.home .search--open{
+	height: 180px !important;
+}
+
+
+.home .search-wrap {
+	margin-right: 50px;
+  z-index: 2;
+}
+
+.home #btn-search-close{
+	margin-right: 25px;
+}
+
 .home .content-page.faq{
 	background-color: beige;
 	color: #22295f;

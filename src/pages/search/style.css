@@ -308,19 +308,19 @@ pre {
 }
 
 .page--move .page__folder:first-child {
-	transform: translate3d(0px, 45vh, -300px);
+	transform: translate3d(0px, 45vh, -400px);
 }
 
 .page--move .page__folder:nth-child(2) {
-	transform: translate3d(0px, 45vh, -250px);
+	transform: translate3d(0px, 45vh, -350px);
 }
 
 .page--move .page__folder:nth-child(3) {
-	transform: translate3d(0px, 45vh, -200px);
+	transform: translate3d(0px, 45vh, -300px);
 }
 
 .page--move .page__folder:nth-child(4) {
-	transform: translate3d(0px, 45vh, -150px);
+	transform: translate3d(0px, 45vh, -250px);
 }
 
 .js .search {
@@ -329,6 +329,11 @@ pre {
 
 .js .search--open {
 	pointer-events: auto;
+	padding-top: 50px;
+}
+
+.js .search--open .icon-departments-container{
+	margin-top: 30px;
 }
 
 /* Close button */
@@ -621,6 +626,10 @@ a,
 .listing-header__side,
 .search-wrap {
 	margin: 0 0 0 auto;
+}
+
+.search-wrap {
+	margin-right: 25px;
 }
 
 

@@ -7,6 +7,9 @@ import {
   BrowserRouter as Router,
   useHistory
 } from "react-router-dom";
+
+import Menu from '../../components/Menu';
+
 import '../../styles/main.css';
 import './style.css';
 
@@ -120,9 +123,13 @@ export default function Home() {
         </defs>
       </svg>
       <div className={ `search ${openSearch ? 'search--open' : '' }` }>
-        <button id="btn-search-close" onClick={()=>setOpenSearch(false)} className="btn btn--search-close" aria-label="Close search form"><svg className="icon icon--cross"><use xlinkHref="#icon-cross"></use></svg></button>
-        <div className="search__form">
-          <input 
+        <button id="btn-search-close" onClick={()=>setOpenSearch(false)} className="btn btn--search-close" aria-label="Close search form">
+          <svg className="icon icon--cross"><use xlinkHref="#icon-cross"></use></svg>
+        </button>
+        <div className="search__form icon-departments-container">
+          <Menu />
+          {/**
+           * <input 
             className="search__input" 
             onKeyDown={_handleKeyDown} 
             name="search" 
@@ -137,6 +144,7 @@ export default function Home() {
             autoCapitalize="off" 
             spellCheck="false" />
           <span className="search__info">Hit enter to search or ESC to close</span>
+           */}
         </div>
       </div>
       <div className={ `page ${openSearch ? 'page--move' : '' }` }>
@@ -147,16 +155,13 @@ export default function Home() {
         
         <main className="main-wrap page__folder">
           <header className="listing-header">
-            <div className="listing-links">
-              {/* <a className="codrops-icon codrops-icon--prev" href="" title="Previous Demo"><svg className="icon icon--arrow"><use xlinkHref="#icon-arrow"></use></svg></a> */}
-              <a className="codrops-icon codrops-icon--drop" href="" title="Back to the article"><img style={{ width: '25px' }} src="/assets/img/logo.svg"></img></a>
+            <div className="logo">
+              <div className="listing-links">
+                {/* <a className="codrops-icon codrops-icon--prev" href="" title="Previous Demo"><svg className="icon icon--arrow"><use xlinkHref="#icon-arrow"></use></svg></a> */}
+                <a className="codrops-icon codrops-icon--drop" href="" title="Back to the article"><img style={{ width: '60px' }} src="/assets/img/logo.svg"></img></a>
+              </div>
+              <h1 className="listing-header__title">Heptastadion (HEP)</h1>
             </div>
-            <h1 className="listing-header__title">Heptastadion (HEP)</h1>
-            <div className="search-wrap hide">
-              <button id="btn-search" onClick={()=>setOpenSearch(true)} className="btn btn--search"><svg className="icon icon--search"><use xlinkHref="#icon-search"></use></svg></button>
-            </div>
-          </header>
-          <div className="content">
             <div className="search-bar">
               <div className={ `search search--open` }>
                 <div className="search__form">
@@ -178,6 +183,15 @@ export default function Home() {
                 </div>
               </div>
             </div>
+            <div className="search-wrap hide">
+              <button id="btn-search" onClick={()=>setOpenSearch(true)} className="btn btn--search">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" className="bi bi-back" viewBox="0 0 16 16">
+                  <path d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2z"/>
+                </svg>
+              </button>
+            </div>
+          </header>
+          <div className="content">
             <div className="content-page">
               <div className="content-intro">
                 <h1><b>Heptastadion</b>: el puente hacia Alexandrià<br /></h1>

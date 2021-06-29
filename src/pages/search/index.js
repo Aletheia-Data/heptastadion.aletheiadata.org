@@ -269,26 +269,23 @@ export default function Search() {
 
 
   const Card = (result, i) =>{
+
+    // set variables
+    let subtitle = result.Estatus || result.ESTATUS || result['TIPO EMPLEADO'] || result['MEDIO'];
+    let title = result['NOMBRES'] ? result['NOMBRES'] + ' ' + result['APELLIDOS'] : result['Nombre'] || result['NOMBRE'];
+    let departamento = result.Departamento;
+
     return(
       <div className="card" key={`card_${i}}`}>
           <div className="courses-container col-xs-6">
               <div className="course">
                   <div className="course-preview">
-                    <h6>{ 
-                      result.Estatus || 
-                      result.ESTATUS ||
-                      result['TIPO EMPLEADO'] ||
-                      result['MEDIO']
-                    }</h6>
-                    <h2>{ 
-                      result.Nombre || 
-                      result.NOMBRE ||
-                      result['NOMBRES'] ? result['NOMBRES'] + ' ' + result['APELLIDOS'] : ''
-                    }</h2>
+                    <h6>{ subtitle }</h6>
+                    <h2>{ title }</h2>
                   </div>
                   <div className="course-info">
                     <h6>{ 
-                      result.Departamento 
+                      departamento
                     }</h6>
                     <pre>
                       <ul>
