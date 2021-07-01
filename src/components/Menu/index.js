@@ -5,15 +5,14 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/themes/splide-skyblue.min.css';
 import './style.css';
 
-export default () => {
-  
+export default ({ departments, select }) => {
+  let currentItem = 0;
   return (
-    <div className="menu">
+    <div className="menu" style={{ width: '100vw' }}>
       <Splide
         className="icon-departments"
         options={ {
           type      : 'loop',
-          width     : 800,
           perPage   : 2,
           perMove   : 1,
           gap       : '1rem',
@@ -22,28 +21,20 @@ export default () => {
           fixedHeight : 150,
           focus       : 'center',
         } }
-        onMoved={ ( splide, newIndex ) => { console.log( 'moved', newIndex ) } }
+        onMoved={ ( splide, newIndex ) => { currentItem = newIndex; console.log( 'moved', currentItem ) } }
       >
-        <SplideSlide className="department">
-          <img src="assets/img/icons/logo_miner_gray.png" alt="Image 1"/>
-        </SplideSlide>
-        <SplideSlide className="department">
-          <img src="assets/img/icons/logo_mitur_gray.png" alt="Image 2"/>
-        </SplideSlide>
-        <SplideSlide className="department">
-          <img src="assets/img/icons/logo_mirex_gray.jpeg" alt="Image 2"/>
-        </SplideSlide>
-        <SplideSlide className="department">
-          <img src="assets/img/icons/logo_miner_gray.png" alt="Image 1"/>
-        </SplideSlide>
-        <SplideSlide className="department">
-          <img src="assets/img/icons/logo_mitur_gray.png" alt="Image 2"/>
-        </SplideSlide>
-        <SplideSlide className="department">
-          <img src="assets/img/icons/logo_mirex_gray.jpeg" alt="Image 2"/>
-        </SplideSlide>
+        {
+          departments.map((item, key) => {
+            return (
+              <SplideSlide className="department"  key={`department_${key}`}>
+                {/** <img src={ item.icon ? item.icon.url : 'assets/img/logo.svg' } alt={ item.name } />  */}
+                <h4>{ item.name }</h4>
+              </SplideSlide>
+            )
+          })
+        }
       </Splide>
-      <button className="btn">Cambia</button>
+      <button className="btn" onClick={()=>select(departments[currentItem].id)}>Cambia</button>
     </div>
   );
 }

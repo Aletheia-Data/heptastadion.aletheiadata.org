@@ -144,6 +144,8 @@ export default function Search() {
   let [perPage, setPerPage] = useState(20);
   let [pageCount, setPageCount] = useState(1);
   let [noResult, setNoResult] = useState(false);
+  let [itemsPerPage] = useState(20);
+  
 
   let [openSearch, setOpenSearch] = useState(false);
 
@@ -364,7 +366,7 @@ export default function Search() {
 
   const nextPage = () =>
   {
-      if (page < numPages(results, page)) {
+      if (page < numPages(results, itemsPerPage)) {
         page++;
         changePage(page, results);
       }
@@ -377,10 +379,10 @@ export default function Search() {
       var btn_next = document.getElementById("btn_next");
       var btn_prev = document.getElementById("btn_prev");
 
-      console.log(page);
-      let pageCount = numPages(results, page);
+      // console.log(page, results);
+      let pageCount = numPages(results, itemsPerPage);
       setPageCount(pageCount)
-      console.log(pageCount);
+      // console.log(pageCount);
       
       // Validate page
       if (page < 1) page = 1;
@@ -429,8 +431,7 @@ export default function Search() {
     setPageCount(1)
   }
 
-  const numPages = (res, page) =>
-  {
+  const numPages = (res, page) =>{
       return Math.ceil(res.length / page);
   }
 

@@ -54,6 +54,7 @@
 
 .home #btn-search-close{
 	margin-right: 25px;
+	z-index: 9;
 }
 
 .home .content-page.faq{

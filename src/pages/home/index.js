@@ -23,6 +23,8 @@ export default function Home() {
   const [results, setResults] = useState([]);
 
   let [latest, setLatest] = useState([]);
+  let [all, setAll] = useState([]);
+  let [departments, setDepartments] = useState([]);
 
   let history = useHistory();
 
@@ -43,12 +45,26 @@ export default function Home() {
       console.log(data)
       if (data.length > 0){
         setLatest(data);
+        setAll(data);
+      }
+    });
+  }
+
+  const getDepartment = () =>{
+    let endpoint_admin = 'https://aletheia-alexandria.herokuapp.com';
+    return fetch(`${endpoint_admin}/departments`)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      if (data.length > 0){
+        setDepartments(data);
       }
     });
   }
 
   useEffect(()=>{
     getListing();
+    getDepartment();
   }, [])
 
   const Card = (result, i) =>{
@@ -94,6 +110,15 @@ export default function Home() {
     }
   }
 
+  const selectDepartment = (e) =>{
+    console.log(e, latest);
+    let new_items = all.filter( i => i.department.id === e);
+    setLatest(new_items);
+    console.log(latest);
+    setOpenSearch(false);
+    // results
+  }
+
   return (
     <div className="home">
       <a href="https://github.com/EnzoVezzaro/heptastadion.aletheiadata.org" className="github-corner" aria-label="View source on GitHub" target="_blank">
@@ -127,7 +152,10 @@ export default function Home() {
           <svg className="icon icon--cross"><use xlinkHref="#icon-cross"></use></svg>
         </button>
         <div className="search__form icon-departments-container">
-          <Menu />
+          {
+            departments.length > 0 &&
+            <Menu departments={departments} select={selectDepartment} />
+          }
           {/**
            * <input 
             className="search__input" 
@@ -183,7 +211,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="search-wrap hide">
+            <div className="search-wrap">
               <button id="btn-search" onClick={()=>setOpenSearch(true)} className="btn btn--search">
                 <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" className="bi bi-back" viewBox="0 0 16 16">
                   <path d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2z"/>
@@ -194,8 +222,8 @@ export default function Home() {
           <div className="content">
             <div className="content-page">
               <div className="content-intro">
-                <h1><b>Heptastadion</b>: el puente hacia Alexandrià<br /></h1>
-                <h3>La <b>Biblioteca de Alexandría</b> es un espacio virtual diseñado para preservar y hacer crecer el conocimiento de la humanidad, haciendo la Web más resistente y abierto. 
+                <h1><b>Heptastadion</b>: el puente hacia Alexandria<br /></h1>
+                <h3>La <b>Biblioteca de Alexandria</b> es un espacio virtual diseñado para preservar y hacer crecer el conocimiento de la humanidad, haciendo la Web más resistente y abierto. 
                     <br /><br />
                     Este servicio tiene como tarea registrar una copia de toda información publica emitida por las autoridades y hacerlas “<b>unstoppable</b>” a trevés de la tecnología blockchain. 
                     <br /><br />
