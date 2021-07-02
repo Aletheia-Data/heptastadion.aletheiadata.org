@@ -371,6 +371,16 @@ pre {
 	transition-delay: 0.35s;
 }
 
+.view-file{
+
+}
+
+.view-file img{
+	width: 80px;
+	margin-bottom: 20px;
+	margin-right: 10px;
+}
+
 @media screen and (max-width: 40em) {
 	.btn--search-close {
 		font-size: 1.25em;

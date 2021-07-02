@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@appbaseio/reactivesearch": "^3.11.8",
+    "@handsontable/react": "^9.0.1",
     "@splidejs/react-splide": "^0.4.4",
     "@splidejs/splide": "^2.4.21",
     "@testing-library/jest-dom": "^4.2.4",
@@ -11,6 +12,7 @@
     "@testing-library/user-event": "^7.1.2",
     "dotenv": "^8.2.0",
     "emotion": "^10.0.27",
+    "handsontable": "^9.0.1",
     "minisearch": "^3.0.3",
     "moment": "^2.29.1",
     "numeral": "^2.0.6",
@@ -21,6 +23,7 @@
     "react-minisearch": "^3.0.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
+    "react-tabulator": "^0.15.0",
     "unfetch": "^4.2.0"
   },
   "scripts": {

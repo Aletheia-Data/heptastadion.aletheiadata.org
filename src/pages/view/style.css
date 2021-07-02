@@ -1,0 +1,8 @@
+.view .content, .view .content-page{
+  height: calc(100% - 20%);
+  padding: 0;
+}
+
+.view .content-page{
+  flex-direction: column;
+}

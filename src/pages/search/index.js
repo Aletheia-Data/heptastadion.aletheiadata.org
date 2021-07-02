@@ -6,6 +6,7 @@ import numeral from 'numeral';
 
 import {
   BrowserRouter as Router,
+  useHistory,
   Link
 } from "react-router-dom";
 
@@ -15,6 +16,10 @@ import './style.css';
 export default function Search() {
 
   let [miniSearch, setMiniSearch] = useState("");
+  let [data, setData] = useState([]);
+  let [header, setHeader] = useState([]);
+
+  let history = useHistory();
 
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -34,7 +39,7 @@ export default function Search() {
   
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
-    const csvData = Papa.parse(url, {
+    Papa.parse(url, {
       download: true,
       encoding: "ISO-8859-1",
       header: true,
@@ -43,7 +48,9 @@ export default function Search() {
         let data = response.data;
         // console.log(data);
         if (data){
+          setData(data);
           let fields = response.meta.fields;
+          setHeader(fields);
           let errors = response.meta.errors;
           console.log('GET Data: ', response);
           response_index = response;
@@ -435,6 +442,11 @@ export default function Search() {
       return Math.ceil(res.length / page);
   }
 
+  const viewFile = (url) =>{
+    console.log(`_view?url=${file}`);
+    history.push(`_view?url=${file}`);
+  }
+
   return (
     <div className="listing">
       <svg className="hidden">
@@ -534,6 +546,12 @@ export default function Search() {
             </div>
           </div>
           <div className="bottom-nav">
+            <a href="#" className="view-file" onClick={()=>viewFile(url)}>
+              <img src="assets/img/icons/save_icon.png" />
+            </a>
+            <a href={`${url}`} target="_blank" className="view-file">
+              <img src="assets/img/icons/download_icon.png" />
+            </a>
             <nav className="pagination-units">
               <div className="pagination">
                 <a href="#" onClick={prevPage} id="btn_prev">Prev</a>
