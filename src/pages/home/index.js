@@ -89,9 +89,18 @@ export default function Home() {
                         <li style={{ display: 'flex',alignItems: 'flex-start', whiteSpace: 'break-spaces' }}>
                           <b>{ 'Status: ' }</b><p style={{ margin: 0,marginLeft: 10 }}>{ result.status }</p>
                         </li>
+                        <li style={{ display: 'flex',alignItems: 'flex-start', whiteSpace: 'break-spaces' }}>
+                          <b>{ 'Type: ' }</b><p style={{ margin: 0,marginLeft: 10 }}>{ result.type }</p>
+                        </li>
                       </ul>
                     </pre>
-                    <button className="btn" onClick={()=>history.push(`_search?url=${result.cid}.ipfs.dweb.link`)}>
+                    <button className="btn" onClick={()=>{
+                      if (result.type === 'csv'){
+                        history.push(`_search?url=${result.cid}.ipfs.dweb.link`)                        
+                      } else {
+                        window.open(`https://${result.cid}.ipfs.dweb.link`,'_blank');
+                      }
+                    }}>
                       <p style={{ margin: 0 }}>{ 'CONSULTAR' }</p>
                     </button>
                 </div>
