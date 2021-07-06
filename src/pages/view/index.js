@@ -96,7 +96,7 @@ export default function View() {
         <main className="main-wrap page__folder">
           <header className="listing-header">
             <div className="listing-links">
-              <a className="codrops-icon codrops-icon--prev" href={`_search?url=${urlOriginal}`} ><svg className="icon icon--arrow"><use xlinkHref="#icon-arrow"></use></svg></a>
+              <Link className="codrops-icon codrops-icon--prev" to="/"><svg className="icon icon--arrow"><use xlinkHref="#icon-arrow"></use></svg></Link>
               <Link className="codrops-icon codrops-icon--drop" to="/"><img style={{ width: '25px' }} src="/assets/img/logo.svg"></img></Link> 
             </div>
             <div className="search-wrap hide">
