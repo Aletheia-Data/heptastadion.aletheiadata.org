@@ -722,7 +722,7 @@ a,
 	transform: rotate3d(0, 0, 1, 22.5deg);
 }
 
-.listing .listing-links::after {
+.view .listing-links::after, .listing .listing-links::after {
 	display: block;
 }
 
