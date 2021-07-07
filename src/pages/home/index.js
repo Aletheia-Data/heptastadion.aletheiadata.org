@@ -96,9 +96,9 @@ export default function Home() {
                     </pre>
                     <button className="btn" onClick={()=>{
                       if (result.type === 'csv'){
-                        history.push(`_search?url=${result.cid}.ipfs.dweb.link`)                        
+                        history.push(`_search?url=https://ipfs.io/ipfs/${result.cid}`)                        
                       } else {
-                        window.open(`https://${result.cid}.ipfs.dweb.link`,'_blank');
+                        window.open(`https://ipfs.io/ipfs/${result.cid}`,'_blank');
                       }
                     }}>
                       <p style={{ margin: 0 }}>{ 'CONSULTAR' }</p>
