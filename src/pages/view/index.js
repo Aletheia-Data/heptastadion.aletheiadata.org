@@ -117,6 +117,12 @@ export default function View() {
                   autoRowSize={true}
                   autoColumnSize={true}
                   colHeaders={header}
+                  manualRowMove={true}
+                  manualColumnMove={true}
+                  contextMenu={true}
+                  filters={true}
+                  dropdownMenu={true}
+                  language={'en-US'}
                 />
             </div>
           </div>

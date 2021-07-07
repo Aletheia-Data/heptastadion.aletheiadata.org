@@ -5,4 +5,5 @@
 
 .view .content-page{
   flex-direction: column;
+  padding: 0 2.5em;
 }
