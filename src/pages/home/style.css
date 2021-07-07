@@ -96,9 +96,9 @@
 }
 
 .home .latest{
-	padding: 60px 10%;
+	padding: 60px 0;
 	max-height: 1000px;
-  overflow: auto;
+  	overflow: auto;
 	border-bottom: 2px solid #fff;
 }
 
