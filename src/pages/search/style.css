@@ -330,6 +330,7 @@ pre {
 .js .search--open {
 	pointer-events: auto;
 	padding-top: 50px;
+	z-index: 2;
 }
 
 .js .search--open .icon-departments-container{
@@ -351,6 +352,7 @@ pre {
 /* Search input */
 .js .search__form,
 .js .search__info {
+	z-index: 999;
 	opacity: 0;
 	transform: translate3d(0,150px,0);
 	transition: opacity 1s, transform 1s;
@@ -464,7 +466,10 @@ pre {
 	}
 }
 
-@media all and (max-width: 1439px) {
+@media all and (max-width: 1440px) {
+	.js .search--open {
+		padding-top: 0px;
+	}
 	.search__input {
 		font-size: 2rem;
 	}
@@ -478,6 +483,9 @@ pre {
 }
 
 @media all and (max-width: 1025px) {
+	.js .search--open {
+		padding-top: 130px;
+	}
 	.search__input {
 		font-size: 2rem;
 	}
@@ -497,6 +505,11 @@ pre {
 
 
 @media all and (max-width: 1024px) {
+	.menu .btn {
+		margin: auto;
+		position: relative;
+		top: -170px;
+	}
 	.course-info pre ul{
 		margin-bottom: 30px;		
 	}
