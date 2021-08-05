@@ -255,7 +255,7 @@ export default function Home() {
                 Bueno, puedes buscar las botellas del gobierno, puedes consultar el gasto que se hace con tus taxes, tambien nos puedes simplemente <a href="https://www.buymeacoffee.com/aletheiadata" target="_blank">ofrecer una cerveza</a> 🍻
                 <br /><br />
                 <h3>¿Por qué usar una solución descentralizada?</h3>
-                Apoyarnos sobre una plataforma descentralizada nos brinda la garantía que la información no va a ser modificada, hackeada, o corrompida. También nos brinda la mejor opción para mantener la información siempre disponible ( 24h/7d ) ya que nuestro gobierno hace un horrible trabajo en esto.
+                Apoyarnos sobre una plataforma descentralizada nos brinda la garantía que la información no va a ser modificada, hackeada, o corrompida. También nos brinda la mejor opción para mantener la información siempre disponible ( 24h/7d ) ya que nuestro gobierno hace un <a href="#" onClick={()=>{history.push(`_why`)}}>horrible trabajo</a> en esto.
                 <br /><br />
                 <h3>¿A qué te refieres con hacer la información 'unstoppable'?</h3>
                 Unstoppable o decentralized information quiere decir que la información no está ubicada en una localidad fija (o server) sino que está distribuido en la red atrevés de IPFS, no se puede modificar ya que habría que descriptar los bloques del blockchain y te aseguro no es tarea fácil, y ultimo está siempre disponible ya que vive en cada uno de nuestros computadores.

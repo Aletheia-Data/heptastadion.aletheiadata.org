@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Home from './pages/home';
 import Search from './pages/search';
 import View from './pages/view';
+import Why from './pages/why';
 
 //const Home = () => <h1><Link to="/about">Click Me</Link></h1>
 //const About = () => <h1>About Us</h1>
@@ -16,6 +17,7 @@ const App = () => (
       <Route exact path="/" component={Home} />
       <Route path="/_search" component={Search} />
       <Route path="/_view" component={View} />
+      <Route path="/_why" component={Why} />
     </Switch>
   </Router>
 )
