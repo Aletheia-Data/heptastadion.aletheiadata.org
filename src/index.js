@@ -12,6 +12,7 @@ let version = `
   ********************************
   ********************************
   `;
+  console.log(version);
   console.log(version); 
 
 if (window.location.host !== 'localhost:3000'){
