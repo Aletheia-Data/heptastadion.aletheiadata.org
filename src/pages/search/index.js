@@ -17,6 +17,7 @@ export default function Search() {
 
   let [miniSearch, setMiniSearch] = useState("");
   let [data, setData] = useState([]);
+  let [cid, setCid] = useState('');
   let [header, setHeader] = useState([]);
 
   let history = useHistory();
@@ -26,11 +27,11 @@ export default function Search() {
   const file = urlParams.get('url');
   const cors_anywhere = 'https://cors-aletheiadata.herokuapp.com';
 
-  const protocol = file.includes("ipfs");;
+  const protocol = file.includes("ipfs");
 
   let url = '';
   if (protocol){
-    url = `https://${file}`
+    url = `https://${file}`;
   } else {
     url = `${cors_anywhere}/${file}`
   }
@@ -39,6 +40,8 @@ export default function Search() {
   
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
+    setCid(file.split('.ipfs.dweb.link')[0]);
+
     Papa.parse(url, {
       download: true,
       encoding: "ISO-8859-1",
@@ -447,6 +450,8 @@ export default function Search() {
     history.push(`_view?url=${file}`);
   }
 
+  const api_host = 'https://api-aletheiadata.herokuapp.com';
+
   return (
     <div className="listing">
       <svg className="hidden">
@@ -548,10 +553,16 @@ export default function Search() {
           <div className="bottom-nav">
             <a href="#" className="view-file" onClick={()=>viewFile(url)}>
               <img src="assets/img/icons/save_icon.png" />
-            </a>
+            </a> 
             <a href={`${url}`} target="_blank" className="view-file">
               <img src="assets/img/icons/download_icon.png" />
             </a>
+            {
+              cid &&
+              <a href={`${api_host}/utils/transform-csv/ipfs/${cid}`} target="_blank" className="view-file">
+                <img src="assets/img/icons/api.png" />
+              </a>
+            }
             <nav className="pagination-units">
               <div className="pagination">
                 <a href="#" onClick={prevPage} id="btn_prev">Prev</a>

@@ -375,9 +375,9 @@ pre {
 }
 
 .view-file img{
-	width: 80px;
+	width: 55px;
 	margin-bottom: 20px;
-	margin-right: 10px;
+	margin-right: 20px;
 }
 
 @media screen and (max-width: 40em) {

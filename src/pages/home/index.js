@@ -68,6 +68,9 @@ export default function Home() {
   }, [])
 
   const Card = (result, i) =>{
+
+    const api_host = 'https://api-aletheiadata.herokuapp.com';
+    
     return(
       <div className="card" key={`card_${i}}`}>
           <div className="courses-container col-xs-6">
@@ -93,11 +96,17 @@ export default function Home() {
                           </a>
                         </li>
                         <li style={{ display: 'flex',alignItems: 'flex-start', whiteSpace: 'break-spaces' }}>
+                          <b>{ 'API: ' }</b>
+                          <a href={`${api_host}/utils/transform-csv/ipfs/${result.cid}`} target="_blank">
+                            <p style={{ margin: 0,marginLeft: 10 }}>{ `https://api-aletheiadata.herokuapp.com/utils/transform-csv/ipfs/${result.cid}` }</p>
+                          </a>
+                        </li>
+                        <li style={{ display: 'flex',alignItems: 'flex-start', whiteSpace: 'break-spaces' }}>
                           <b>{ 'Status: ' }</b><p style={{ margin: 0,marginLeft: 10 }}>{ result.status }</p>
                         </li>
                         <li style={{ display: 'flex',alignItems: 'flex-start', whiteSpace: 'break-spaces' }}>
                           <b>{ 'Type: ' }</b><p style={{ margin: 0,marginLeft: 10 }}>{ result.type }</p>
-                        </li>
+                        </li> 
                       </ul>
                     </pre>
                     <button className="btn" onClick={()=>{
