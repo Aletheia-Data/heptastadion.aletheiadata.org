@@ -122,6 +122,11 @@
 	overflow: auto;
 }
 
+.home .main-wrap .connect-btn{
+	padding: 15px 30px;
+    border-radius: 50px;
+}
+
 .listing-links::after {
 	display: none;
 }

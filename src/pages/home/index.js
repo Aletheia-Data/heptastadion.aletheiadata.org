@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Web3 from 'web3';
 
 import moment from 'moment';
 import 'moment/locale/es';
@@ -17,6 +18,8 @@ moment.locale('es');
 
 export default function Home() {
 
+  const web3 = new Web3(window.ethereum);
+
   let loading = false;
 
   const [search, setSearch] = useState("");
@@ -26,6 +29,12 @@ export default function Home() {
   let [all, setAll] = useState([]);
   let [departments, setDepartments] = useState([]);
 
+  let [connected, setConnected] = useState(false);
+  let [account, setAccount] = useState('');
+  let [balance, setBalance] = useState('');
+  let [netId, setNetId] = useState('');
+  let [accounts, setAccounts] = useState('');
+
   let history = useHistory();
 
   let [openSearch, setOpenSearch] = useState(false);
@@ -34,6 +43,40 @@ export default function Home() {
     if (e.key === 'Enter') {
       setOpenSearch(false);
       history.push(`_search?url=${search}`);
+    }
+  }
+
+  const initWeb3 = async () =>{
+    if(typeof window.ethereum!=='undefined'){
+      // first of all enabled ethereum
+      await window.ethereum.enable();
+        
+      const netId = await web3.eth.net.getId()
+      const accounts = await web3.eth.getAccounts()
+
+      console.log(web3, accounts);
+
+      //load balance
+      if(accounts[0] && typeof accounts[0] !=='undefined'){
+        const balance = await web3.eth.getBalance(accounts[0])
+
+        setConnected(true);
+        setBalance(balance);
+        setAccount(accounts[0]);
+        setNetId(netId);
+        setAccounts(accounts);
+        
+      } else {
+        window.alert('Please login with MetaMask');
+        return;
+      }
+
+      //load contracts
+      /*
+      TODO: create contracts for uploads' credit
+      */
+    } else {
+      window.alert('Please install MetaMask')
     }
   }
 
@@ -214,6 +257,8 @@ export default function Home() {
               </div>
               <h1 className="listing-header__title">Heptastadion (HEP)</h1>
             </div>
+            <button onClick={initWeb3} title="Rewards coming soon!" className="connect-btn">{connected ? account : 'Connect' }</button>
+            {/*
             <div className="search-bar">
               <div className={ `search search--open` }>
                 <div className="search__form">
@@ -235,6 +280,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
+             */}
             <div className="search-wrap">
               <button id="btn-search" onClick={()=>setOpenSearch(true)} className="btn btn--search">
                 <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" className="bi bi-back" viewBox="0 0 16 16">
