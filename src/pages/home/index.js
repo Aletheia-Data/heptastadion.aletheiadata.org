@@ -46,6 +46,7 @@ export default function Home() {
     }
   }
 
+  // init web3 if available
   const initWeb3 = async () =>{
     if(typeof window.ethereum!=='undefined'){
       // first of all enabled ethereum
@@ -108,6 +109,7 @@ export default function Home() {
   useEffect(()=>{
     getListing();
     getDepartment();
+    initWeb3();
   }, [])
 
   const Card = (result, i) =>{
