@@ -97,8 +97,8 @@ export default function Home() {
                         </li>
                         <li style={{ display: 'flex',alignItems: 'flex-start', whiteSpace: 'break-spaces' }}>
                           <b>{ 'API: ' }</b>
-                          <a href={`${api_host}/utils/transform-csv/ipfs/${result.cid}`} target="_blank">
-                            <p style={{ margin: 0,marginLeft: 10 }}>{ `https://api-aletheiadata.herokuapp.com/utils/transform-csv/ipfs/${result.cid}` }</p>
+                          <a href={`#`} target="_blank">
+                            <p style={{ margin: 0,marginLeft: 10 }}>{ `Soon` }</p>
                           </a>
                         </li>
                         <li style={{ display: 'flex',alignItems: 'flex-start', whiteSpace: 'break-spaces' }}>
