@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Web3 from 'web3';
+import Clipboard from 'react-clipboard.js';
 
 import moment from 'moment';
 import 'moment/locale/es';
@@ -60,6 +61,8 @@ export default function Home() {
       //load balance
       if(accounts[0] && typeof accounts[0] !=='undefined'){
         const balance = await web3.eth.getBalance(accounts[0])
+
+        console.log('check accounts: ', accounts);
 
         setConnected(true);
         setBalance(balance);
@@ -339,6 +342,15 @@ export default function Home() {
             </div>
             <div className="copyright">
                   Made by 👨‍💻 who believe in a better world
+                  <br /><br />
+                  <Clipboard 
+                    className="btn" 
+                    data-clipboard-text="0x4f24a60f578f648CA8c11f9aAa6F6B3e6ceEEeEA"
+                    onSuccess={()=>{ alert("Address Copied. Thank you for donating!") }}
+                    data-title="You're copying out Wallet's Adress"
+                  >
+                    <b>Donate to wallet</b>
+                  </Clipboard>
             </div>
           </div>
         </main>
