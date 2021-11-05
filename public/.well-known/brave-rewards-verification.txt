@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: aletheiadata.org
+Token: ae3625cf549ad1f49d0d4bb8680b2544522ecf18462e67d8e1d976bba1e6b50a
