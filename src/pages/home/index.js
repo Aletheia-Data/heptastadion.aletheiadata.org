@@ -118,6 +118,7 @@ export default function Home() {
   const Card = (result, i) =>{
 
     const api_host = 'https://api-aletheiadata.herokuapp.com';
+    const api_endpoint = 'https://rapidapi.com/aletheia-data-aletheia-data-default/api/aletheia2';
     
     return(
       <div className="card" key={`card_${i}}`}>
@@ -145,8 +146,8 @@ export default function Home() {
                         </li>
                         <li style={{ display: 'flex',alignItems: 'flex-start', whiteSpace: 'break-spaces' }}>
                           <b>{ 'API: ' }</b>
-                          <a href={`#`} target="_blank">
-                            <p style={{ margin: 0,marginLeft: 10 }}>{ `Soon` }</p>
+                          <a href={ api_endpoint } target="_blank">
+                            <p style={{ margin: 0,marginLeft: 10 }}>{ result.api_enabled ? result.api_endpoint ? result.api_endpoint : api_endpoint : `Not available yet` }</p>
                           </a>
                         </li>
                         <li style={{ display: 'flex',alignItems: 'flex-start', whiteSpace: 'break-spaces' }}>
