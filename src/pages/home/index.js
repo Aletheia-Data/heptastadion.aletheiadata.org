@@ -21,7 +21,7 @@ export default function Home() {
 
   const web3 = new Web3(window.ethereum);
 
-  let loading = false;
+  let [loading, setLoading] = useState(false);
 
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
@@ -85,6 +85,7 @@ export default function Home() {
   }
 
   const getListing = () =>{
+    setLoading(true);
     let endpoint_admin = 'https://aletheia-alexandria.herokuapp.com';
     return fetch(`${endpoint_admin}/alexandrias`)
     .then(response => response.json())
@@ -93,6 +94,7 @@ export default function Home() {
       if (data.length > 0){
         setLatest(data);
         setAll(data);
+        setLoading(false);
       }
     });
   }
@@ -303,7 +305,7 @@ export default function Home() {
                     <br /><br />
                     Este servicio tiene como tarea registrar una copia de toda información publica emitida por las autoridades y hacerlas “<b>unstoppable</b>” a trevés de la tecnología blockchain. 
                     <br /><br />
-                    Todos los archivos seràn distribuidos por <a href="https://ipfs.io/" target="_blank">IPFS (Interplanetary File System)</a> que los harà incensurables, inmutables, y disponible en todo momento.
+                    Todos los archivos seràn distribuidos por <a href="https://ipfs.io/" target="_blank">IPFS (Interplanetary File System)</a> haciéndolos incensurables, inmutables, y disponible en todo momento.
                     <br /><br />
                     Una vez en la red <b>P2P</b> no será posible <b>cancelar</b> o <b>remover</b> la información de la red.</h3>
               </div>
@@ -313,16 +315,16 @@ export default function Home() {
                 <h2>FAQ</h2>
                 <br />
                 <h3>¿Qué hacer con este tool?</h3>
-                Bueno, puedes buscar las botellas del gobierno, puedes consultar el gasto que se hace con tus taxes, tambien nos puedes simplemente <a href="https://www.buymeacoffee.com/aletheiadata" target="_blank">ofrecer una cerveza</a> 🍻
+                Bueno, puedes buscar las botellas del gobierno, puedes consultar el gasto que se hace con tus impuestos, o simplemente verificar si el estado está haciendo algo incorrecto con tu nombre.
                 <br /><br />
                 <h3>¿Por qué usar una solución descentralizada?</h3>
-                Apoyarnos sobre una plataforma descentralizada nos brinda la garantía que la información no va a ser modificada, hackeada, o corrompida. También nos brinda la mejor opción para mantener la información siempre disponible ( 24h/7d ) ya que nuestro gobierno hace un <a href="#" onClick={()=>{history.push(`_why`)}}>horrible trabajo</a> en esto.
+                Usar una plataforma descentralizada nos brinda la garantía que la información no va a ser modificada, hackeada, o corrompida. También nos brinda la mejor opción para mantener la información segura y siempre disponible ( 24h/7d ); ya que nuestro gobierno hace un <a href="#" onClick={()=>{history.push(`_why`)}}>horrible trabajo</a> en esto.
                 <br /><br />
                 <h3>¿A qué te refieres con hacer la información 'unstoppable'?</h3>
-                Unstoppable o decentralized information quiere decir que la información no está ubicada en una localidad fija (o server) sino que está distribuido en la red atrevés de IPFS, no se puede modificar ya que habría que descriptar los bloques del blockchain y te aseguro no es tarea fácil, y ultimo está siempre disponible ya que vive en cada uno de nuestros computadores.
+                Unstoppable o decentralized information quiere decir que la información no está ubicada en una localidad fija (o server) sino que está distribuido en la red P2P de IPFS. Una vez un archivo entra en el sistema no se puede modificar ni cancelar, ya que vive en cada uno de nuestros computadores.
                 <br /><br />
                 <h3>¿Qué es CID en IPFS?</h3>
-                Un identificador de contenido, o CID, es un hash criptográfico del contenido que se usa para indicar el material digital en IPFS. No indica dónde se almacena el contenido, pero forma una especie de dirección basada en el contenido mismo. Los CID son cortos, independientemente del tamaño de su contenido subyacente.
+                Un identificador de contenido, o CID, es un hash criptográfico del contenido que se usa para indicar el material digital en IPFS. No indica dónde se almacena el contenido, sino que forma una especie de "dirección" basada en el contenido mismo. El CID es corto, independientemente del tamaño de su contenido subyacente.
                 <br /><br />
               </div>
             </div>
@@ -337,6 +339,12 @@ export default function Home() {
                     latest.map((item, i) => {
                       return Card(item, i);
                     })
+                  }
+                  {
+                    loading &&
+                    <div class="loader-container">
+                      <div class="loader"></div>
+                    </div>
                   }
                 </div>
               </div>
