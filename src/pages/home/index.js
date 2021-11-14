@@ -324,7 +324,7 @@ export default function Home() {
                 <h2>FAQ</h2>
                 <br />
                 <h3>¿Qué hacer con este tool?</h3>
-                Bueno, puedes buscar las botellas del gobierno, puedes consultar el gasto que se hace con tus impuestos, o simplemente verificar si el estado está haciendo algo incorrecto con tu nombre.
+                Bueno, puedes usar nuestro API para crear herramientas para la busqueda de las botellas del gobierno, o para consultar el gasto que se hace con nuestros impuestos, o simplemente usar la data con fines analíticos o de investigación.
                 <br /><br />
                 <h3>¿Por qué usar una solución descentralizada?</h3>
                 Usar una plataforma descentralizada nos brinda la garantía que la información no va a ser modificada, hackeada, o corrompida. También nos brinda la mejor opción para mantener la información segura y siempre disponible ( 24h/7d ); ya que nuestro gobierno hace un <a href="#" onClick={()=>{history.push(`_why`)}}>horrible trabajo</a> en esto.
@@ -332,8 +332,8 @@ export default function Home() {
                 <h3>¿A qué te refieres con hacer la información 'unstoppable'?</h3>
                 Unstoppable o decentralized information quiere decir que la información no está ubicada en una localidad fija (o server) sino que está distribuido en la red P2P de IPFS. Una vez un archivo entra en el sistema no se puede modificar ni cancelar, ya que vive en cada uno de nuestros computadores.
                 <br /><br />
-                <h3>¿Qué es CID en IPFS?</h3>
-                Un identificador de contenido, o CID, es un hash criptográfico del contenido que se usa para indicar el material digital en IPFS. No indica dónde se almacena el contenido, sino que forma una especie de "dirección" basada en el contenido mismo. El CID es corto, independientemente del tamaño de su contenido subyacente.
+                <h3>¿Qué es un CID en IPFS?</h3>
+                Un identificador de contenido, o CID (<a href="https://docs.ipfs.io/concepts/content-addressing/" target="_blank">Content Identifier</a> por su siglas en ingles), es un hash criptográfico del contenido que se usa para indicar el archivo digital en IPFS. No indica dónde se almacena el contenido, sino que forma una especie de "dirección" basada en el contenido mismo. El CID es corto, independientemente del tamaño de su contenido subyacente.
                 <br /><br />
               </div>
             </div>
