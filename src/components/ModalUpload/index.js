@@ -53,14 +53,6 @@ export default ({ wallet, departments }) => {
   let [isUploadValid, setUploadValid] = React.useState(true);
   let [isScreenshotValid, setScreenshotValid] = React.useState(true);
 
-  const {acceptedFiles, getRootProps, getInputProps} = useDropzone();
-  
-  const files = acceptedFiles.map(file => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
-  ));
-
   function openModal() {
     setIsOpen(true);
   }
@@ -145,7 +137,7 @@ export default ({ wallet, departments }) => {
     borderColor: '#ff1744'
   };
 
-  function UploadFile(props) {
+  function UploadFile (props) {
     const {
       getRootProps,
       getInputProps,
@@ -155,7 +147,7 @@ export default ({ wallet, departments }) => {
       isDragAccept,
       isDragReject
     } = useDropzone({
-      accept: '*'
+      accept: '*.csv, *.xls, *.pdf'
     });
   
     const style = useMemo(() => ({
@@ -170,9 +162,8 @@ export default ({ wallet, departments }) => {
     ]);
   
     const acceptedFileItems = acceptedFiles.map(file => {
-      console.log(file);
-      isUploadValid = true;
-      fileUpload = '';
+      setUpload(file);
+      setUploadValid(true);
       return (
         <li key={file.path}>
           {file.path} - {file.size} bytes
@@ -181,8 +172,8 @@ export default ({ wallet, departments }) => {
     });
   
     const fileRejectionItems = fileRejections.map(({ file, errors }) => {
-      isUploadValid = false;
-      fileUpload = file;
+      setUpload(file);
+      setUploadValid(false);
       return (
         <li key={file.path}>
           {file.path} - {file.size} bytes
@@ -202,14 +193,14 @@ export default ({ wallet, departments }) => {
         <div {...getRootProps({ style, className: `dropzone ${props.valid ? '' : 'error'}` })}>
           <input {...getInputProps()} />
           {
-            fileRejectionItems.length === 0 && acceptedFileItems.length === 0 &&
+            !fileUpload &&
             <div>
               <p>Archivo que decea compartir</p>
               <em>(Solo se aceptarán archivos integrales de fuentes verificables y oficiales)</em>
             </div>
           }
           {
-            acceptedFileItems.length > 0 &&
+            fileUpload &&
             <div>
               <p>File Uploaded</p>
               <div>
@@ -283,30 +274,30 @@ export default ({ wallet, departments }) => {
         <div {...getRootProps({ style, className: `dropzone ${props.valid ? '' : 'error'}` })}>
           <input {...getInputProps()} />
           {
-            acceptedFileItems.length == [] &&
+            !fileUpload &&
             <div>
               <p>Screenshot de la fuente</p>
               <em>(Solo se aceptarán imágenes * .jpeg y * .png - asegurate que se vea el dia y la hora)</em>
             </div>
           }
           {
-            fileRejectionItems.length> 0 || acceptedFileItems.length > 0 &&
+            fileUpload &&
             <div>
               <p>Screenshot Uploaded</p>
-              {
-                acceptedFileItems.length > 0 &&
-                <div>
-                  <h4>Accepted files</h4>
-                  <ul>{acceptedFileItems}</ul>
-                </div>
-              }
-              {
-                fileRejectionItems.length > 0 &&
-                <div>
-                  <h4>Rejected files</h4>
-                  <ul>{fileRejectionItems}</ul>
-                </div>
-              }
+              <div>
+                <h4>Accepted files</h4>
+                <ul>{acceptedFileItems}</ul>
+              </div>
+            </div>
+          }
+          {
+            fileRejectionItems.length > 0 &&
+            <div>
+              <p>Screenshot Failed</p>
+              <div>
+                <h4>Rejected files</h4>
+                <ul>{fileRejectionItems}</ul>
+              </div>
             </div>
           }
         </div>
@@ -363,8 +354,6 @@ export default ({ wallet, departments }) => {
                 helperText="Ingrese el título del documento" 
                 value={title}
                 onChange={(e)=>{
-                  isTitleValid = true;
-                  title = e.target.value;
                   setTitleValid(true);
                   setTitle(e.target.value);
                 }}
