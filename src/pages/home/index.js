@@ -11,6 +11,8 @@ import {
 } from "react-router-dom";
 
 import Menu from '../../components/Menu';
+import ModalUpload from '../../components/ModalUpload';
+import ModalVerify from '../../components/ModalVerify';
 
 import '../../styles/main.css';
 import './style.css';
@@ -35,6 +37,9 @@ export default function Home() {
   let [balance, setBalance] = useState('');
   let [netId, setNetId] = useState('');
   let [accounts, setAccounts] = useState('');
+
+  let [openModal, setOpenModal] = useState(false);
+  let [modalData, setModalData] = useState({});
 
   let history = useHistory();
 
@@ -337,6 +342,31 @@ export default function Home() {
                 <br /><br />
               </div>
             </div>
+            {
+              connected && departments.length > 0 &&
+              <div className="content-page contributor-section">
+                <div className="contributor-container">
+                  <h3>¿Quieres contribuir?<sup>*</sup> </h3>
+                  Puedes ayudarnos de varias formas:
+                  <br /><br />
+                  <div className="contributor-choices">
+                    <div className="contributor-buttons">
+                      <ModalUpload wallet={account} departments={departments} />
+                      <ul>
+                        <li>Puedes contribuir alimentando<br />el ecosistema Aletheia</li>
+                      </ul>
+                    </div>
+                    <div className="contributor-buttons">
+                      <ModalVerify wallet={account} departments={departments} />
+                      <ul>
+                        <li>Puedes contribuir verficando<br />que la información sea correcta</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <span className="contribution-disc"><sup>*</sup> all contributors' wallets will be saved for <b>future Airdrop</b> 🚀</span>
+                </div>
+              </div>
+            }
             <div className="content-page listing">
               <div className="content-intro">
                 <h3>Latest Uploads</h3>
