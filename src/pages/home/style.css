@@ -151,6 +151,25 @@
 .home .main-wrap .connect-btn{
 	padding: 15px 30px;
     border-radius: 50px;
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.home .main-wrap .connected-light{
+    width: 10px;
+    height: 10px;
+    background-color: #0dad77;
+    border-radius: 50px;
+    margin-right: 20px;
+}
+
+.home .main-wrap .disconnected-light{
+	width: 10px;
+    height: 10px;
+    background-color: #bd1b1b;
+    border-radius: 50px;
+    margin-right: 20px;
 }
 
 .listing-links::after {

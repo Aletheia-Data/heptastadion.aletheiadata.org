@@ -141,9 +141,15 @@ export default function Home() {
                           </a>
                         </li>
                         <li style={{ display: 'flex',alignItems: 'flex-start', whiteSpace: 'break-spaces' }}>
-                          <b>{ 'Fuente: ' }</b>
+                          <b>{ 'Source: ' }</b>
                           <a href={result.source_url} target="_blank">
                             <p style={{ margin: 0,marginLeft: 10 }}>{ result.source_url }</p>
+                          </a>
+                        </li>
+                        <li style={{ display: 'flex',alignItems: 'flex-start', whiteSpace: 'break-spaces' }}>
+                          <b>{ 'Proof: ' }</b>
+                          <a href={ result['Proof'] ? result['Proof'].url : '#'} target="_blank">
+                            <p style={{ margin: 0,marginLeft: 10 }}>{ result['Proof'] ? result['Proof'].url : 'Not yet available' }</p>
                           </a>
                         </li>
                         <li style={{ display: 'flex',alignItems: 'flex-start', whiteSpace: 'break-spaces' }}>
@@ -265,7 +271,10 @@ export default function Home() {
               </div>
               <h1 className="listing-header__title">Heptastadion (HEP)</h1>
             </div>
-            <button onClick={initWeb3} title="Rewards coming soon!" className="connect-btn">{connected ? account : 'Connect' }</button>
+            <button onClick={initWeb3} title="Rewards coming soon!" className="connect-btn">
+              <div className={ `${connected ? 'connected' : 'disconnected'}-light` } ></div>
+              {connected ? 'connected' : 'disconnected' }
+            </button>
             {/*
             <div className="search-bar">
               <div className={ `search search--open` }>
@@ -352,14 +361,12 @@ export default function Home() {
             <div className="copyright">
                   Made by 👨‍💻 who believe in a better world
                   <br /><br />
-                  <Clipboard 
-                    className="btn" 
-                    data-clipboard-text="0x4f24a60f578f648CA8c11f9aAa6F6B3e6ceEEeEA"
-                    onSuccess={()=>{ alert("Address Copied. Thank you for donating!") }}
-                    data-title="You're copying out Wallet's Adress"
+                  <a 
+                    href="https://gitcoin.co/grants/3179/aletheia-data"
+                    target="_blank"
                   >
                     <b>Donate to wallet</b>
-                  </Clipboard>
+                  </a>
             </div>
           </div>
         </main>
