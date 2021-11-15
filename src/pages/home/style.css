@@ -54,6 +54,50 @@
 	align-items: center;
 }
 
+.home .contributor-section{
+	background-color: #f5f5db;
+	flex-direction: column;
+	text-align: center;
+}
+
+.home .contributor-container{
+	background-color: #ff9e9e;
+	border-radius: 30px;
+	padding: 30px;
+	color: #21295f;
+	width: 100%;
+}
+
+
+.home .contributor-container ul{
+	list-style: none;
+	padding: 0;
+	margin-top: 40px;
+}
+
+.home .contributor-choices{
+	display: flex;
+	margin-bottom: 20px;
+}
+
+.home .contribution-disc{
+	font-size: 13px;
+	width: 60%;
+}
+
+.home .contributor-buttons{
+	display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex: 1 1;
+    padding: 0px 40px;
+    margin-top: 20px;
+}
+
+.home .contributor-buttons .connect-btn{
+	margin: 0px 15px;
+}
+
 .home .logo{
 	display: flex;
 	align-items: center;
@@ -81,6 +125,7 @@
 .home .content-page.faq{
 	background-color: beige;
 	color: #22295f;
+	padding-bottom: 0;
 }
 
 .home .content-page.faq a{

@@ -1,0 +1,33 @@
+.ReactModal__Content{
+    overflow: inherit !important;
+}
+
+.modal-close{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.modal-close img{
+    width: 50px;
+    position: relative;
+    top: -20px;
+    right: -20px;
+}
+
+.dropzone.error{
+    border-color: #d32f2f !important;
+}
+
+.submitButton, .closeButton {
+    margin-top: 20px;
+    padding: 15px 30px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.MuiFormControlLabel-root.error{
+    color: #d32f2f !important;
+}
