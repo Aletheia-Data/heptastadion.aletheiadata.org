@@ -61,34 +61,34 @@ export default function Why() {
           </header>
           <div className="content">
             <div className="content-page">
-              <div class="case" style={{ width:'auto',height:'400px', position: 'relative' }}>
+              <div className="case" style={{ width:'auto',height:'400px', position: 'relative' }}>
                 <img src="/assets/img/why/1.png" style={{ width:'auto',height:'100%' }} />
                 <div style={{width:'auto',height:'100px',position:'absolute',bottom:20}}>
-                  <iframe src="https://giphy.com/embed/gd09Y2Ptu7gsiPVUrv" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                  <iframe src="https://giphy.com/embed/gd09Y2Ptu7gsiPVUrv" frameBorder="0" className="giphy-embed" allowFullScreen></iframe>
                 </div>
               </div>
               <br />
               <br />
-              <div class="case" style={{ width:'auto',height:'400px', position: 'relative' }}>
+              <div className="case" style={{ width:'auto',height:'400px', position: 'relative' }}>
                 <img src="/assets/img/why/2.png" style={{ width:'auto',height:'100%' }} />
                 <div style={{width:'auto',height:'100px',position:'absolute',bottom:20}}>
-                  <iframe src="https://giphy.com/embed/lYKvaJ8EQTzCU" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                  <iframe src="https://giphy.com/embed/lYKvaJ8EQTzCU" frameBorder="0" className="giphy-embed" allowFullScreen></iframe>
                 </div>
               </div>
               <br />
               <br />
-              <div class="case" style={{ width:'auto',height:'400px', position: 'relative' }}>
+              <div className="case" style={{ width:'auto',height:'400px', position: 'relative' }}>
                 <img src="/assets/img/why/3.png" style={{ width:'auto',height:'100%' }} />
                 <div style={{width:'auto',height:'100px',position:'absolute',bottom:20}}>
-                  <iframe src="https://giphy.com/embed/Ci2RTOBoIrn68" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                  <iframe src="https://giphy.com/embed/Ci2RTOBoIrn68" frameBorder="0" className="giphy-embed" allowFullScreen></iframe>
                 </div>
               </div>
               <br />
               <br />
-              <div class="case" style={{ width:'auto',height:'400px', position: 'relative' }}>
+              <div className="case" style={{ width:'auto',height:'400px', position: 'relative' }}>
                 <img src="/assets/img/why/4.png" style={{ width:'auto',height:'100%' }} />
                 <div style={{width:'auto',height:'100px',position:'absolute',bottom:20}}>
-                  <iframe src="https://giphy.com/embed/UqLmZc7QXjX6LpLFxA" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                  <iframe src="https://giphy.com/embed/UqLmZc7QXjX6LpLFxA" frameBorder="0" className="giphy-embed" allowFullScreen></iframe>
                 </div>
               </div>
             </div>

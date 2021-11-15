@@ -30,7 +30,7 @@ export default ({ data }) => {
     setIsOpen(false);
   }
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <div>
