@@ -61,6 +61,8 @@ export default ({ wallet, departments }) => {
   let [isUploadValid, setUploadValid] = React.useState(true);
   let [isScreenshotValid, setScreenshotValid] = React.useState(true);
 
+  let [isLoading, setLoading] = React.useState(false);
+
   function openModal() {
     setIsOpen(true);
   }
@@ -69,6 +71,25 @@ export default ({ wallet, departments }) => {
   }
 
   function closeModal() {
+    setUpload('');
+    setScreenshot('');
+    setUploadError('');
+    setUploadErrorMessage('');
+    setScreenshotError('');
+    setScreenshotMessage('');
+    setDepartmentSelect('');
+    setFileType('');
+    setTitle('');
+    setDescription('');
+    setSource('');
+    setTitleValid(true);
+    setDescValid(true);
+    setSourceValid(true);
+    setDepartmentValid(true);
+    setTypeValid(true);
+    setUploadValid(true);
+    setScreenshotValid(true);
+    setLoading(false);
     setIsOpen(false);
     setUploadSent(false);
   }
@@ -118,7 +139,9 @@ export default ({ wallet, departments }) => {
       isScreenshotValid &&
       walletDisclaimer
     ){
+
       console.log('success: : ', data, wallet);
+      setLoading(true);
 
       axios.post('https://aletheia-alexandria.herokuapp.com/alexandrias', {
         "title": data.title,
@@ -134,22 +157,7 @@ export default ({ wallet, departments }) => {
         console.log(response);
 
         const item_id = response.data.id;
-        /*
-        aletheias: []
-        api_enabled: false
-        createdAt: "2021-11-15T11:59:59.887Z"
-        department: {_id: '60d4e0ab820c5a0777ee98d5', url: 'https://www.ministeriodeeducacion.gob.do/', name: 'Ministerio de Educación de la República Dominicana (MINERD)', published_at: '2021-06-24T19:44:47.512Z', createdAt: '2021-06-24T19:44:43.624Z', …}
-        description: "Test 1"
-        file: []
-        id: "61924bbfa3de2f00166229a4"
-        published_at: "2021-11-15T11:59:59.884Z"
-        source_url: "Test 3"
-        status: "under_review"
-        title: "Test 1"
-        type: "csv"
-        updatedAt: "2021-11-15T11:59:59.895Z"
-        */
-
+        
         const dataForm = new FormData()
         dataForm.append('files', data.fileUpload);
         dataForm.append('ref', 'alexandria');
@@ -183,23 +191,29 @@ export default ({ wallet, departments }) => {
 
             console.log('uploaded screenshot', screenUploaded);
 
+            setLoading(false);
+
             setUploadSent(true);
             
           }).catch(function (error) {
             console.log(error);
+            setLoading(false);
           });
         
         }).catch(function (error) {
           console.log(error);
+          setLoading(false);
         });
         
       })
       .catch(function (error) {
         console.log(error);
+        setLoading(false);
       });
 
     } else {
       console.log('error: ', data);
+      setLoading(false);
     }
   }
 
@@ -611,7 +625,7 @@ export default ({ wallet, departments }) => {
 
 
             <div>
-              <button className="submitButton" onClick={submit}>Submit</button>
+              <button disabled={ isLoading } className="submitButton" onClick={submit}>{ isLoading ? 'Uploading...' : 'Submit' }</button>
             </div>  
 
           </div>
@@ -621,9 +635,9 @@ export default ({ wallet, departments }) => {
           uploadSent &&
           <div className="file-uploaded">
 
-            <br /><br />
+            <p>Thank you!</p>
 
-            <p>Wallet Information</p>
+            <p>Your Address Wallet has being recorded. <br />Your document is under review 🤖</p>
             
             <div>
               <button className="closeButton" onClick={closeModal}>Close</button>

@@ -5,11 +5,10 @@
 }
 
 .metamask{
-  position: absolute;
   top: 0;
-  text-align: center;
-  width: 100%;
-  padding-top: 20px;  
+  padding-top: 5px;
+  text-align: left;
+  margin-left: 20px;
 }
 
 .menu .btn{

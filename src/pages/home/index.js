@@ -153,8 +153,8 @@ export default function Home() {
                         </li>
                         <li style={{ display: 'flex',alignItems: 'flex-start', whiteSpace: 'break-spaces' }}>
                           <b>{ 'Proof: ' }</b>
-                          <a href={ result['Proof'] ? result['Proof'].url : '#'} target="_blank">
-                            <p style={{ margin: 0,marginLeft: 10 }}>{ result['Proof'] ? result['Proof'].url : 'Not yet available' }</p>
+                          <a href={ result.proof ? result.proof.url : '#'} target="_blank">
+                            <p style={{ margin: 0, marginLeft: 10 }}>{ result.proof ? result.proof.url : 'Not yet available' }</p>
                           </a>
                         </li>
                         <li style={{ display: 'flex',alignItems: 'flex-start', whiteSpace: 'break-spaces' }}>
@@ -269,9 +269,6 @@ export default function Home() {
         
         <main className="main-wrap page__folder">
           <header className="listing-header">
-            <div className="metamask">
-              Whant to help? Download a crypto wallet to help us out.<br />we recommend using <b><a href="https://metamask.io/" target="_blank">Metamask</a></b>
-            </div>
             <div className="logo">
               <div className="listing-links">
                 {/* <a className="codrops-icon codrops-icon--prev" href="" title="Previous Demo"><svg className="icon icon--arrow"><use xlinkHref="#icon-arrow"></use></svg></a> */}
@@ -283,6 +280,9 @@ export default function Home() {
               <div className={ `${connected ? 'connected' : 'disconnected'}-light` } ></div>
               {connected ? 'connected' : 'disconnected' }
             </button>
+            <div className="metamask">
+              Whant to help? Download a crypto wallet to help us out.<br />we recommend using <b><a href="https://metamask.io/" target="_blank">Metamask</a></b>
+            </div>
             {/*
             <div className="search-bar">
               <div className={ `search search--open` }>

@@ -1,5 +1,24 @@
+.ReactModal__Overlay{
+    position: fixed;
+    inset: 0px;
+    background-color: rgba(255, 255, 255, 0.75);
+    overflow: auto;
+    z-index: 2;
+}
+
 .ReactModal__Content{
     overflow: inherit !important;
+    position: absolute !important;
+    border: 1px solid rgb(204, 204, 204) !important;
+    background: rgb(255, 255, 255) !important;
+    overflow: visible !important;
+    border-radius: 4px !important;
+    outline: none !important;
+    padding: 20px !important;
+    margin-right: -50% !important;
+    transform: translate(-50%, 30px) !important;
+    top: 0 !important;
+    left: 50% !important;
 }
 
 .modal-close{
