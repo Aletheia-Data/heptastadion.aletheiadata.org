@@ -34,8 +34,8 @@ export default ({ data }) => {
 
   return (
     <div>
-      <button onClick={openModal} title="Rewards coming soon!" className="connect-btn">
-        Cargar Archivo
+      <button onClick={openModal} title="Rewards coming soon!" className="connect-btn" disabled >
+        Verificar Archivo (soon)
       </button>
       <Modal
         isOpen={modalIsOpen}

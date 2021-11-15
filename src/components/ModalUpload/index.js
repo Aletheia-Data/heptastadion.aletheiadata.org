@@ -14,6 +14,8 @@ import FormControl from '@mui/material/FormControl';
 
 import './style.css';
 
+const axios = require('axios');
+
 const customStyles = {
   content: { 
     top: '50%',
@@ -36,6 +38,12 @@ export default ({ wallet, departments }) => {
 
   let [fileUpload, setUpload] = React.useState('');
   let [fileScreenshot, setScreenshot] = React.useState('');
+
+  let [fileUploadError, setUploadError] = React.useState('');
+  let [fileUploadErrorMessage, setUploadErrorMessage] = React.useState('');
+  
+  let [fileScreenshotError, setScreenshotError] = React.useState('');
+  let [fileScreenshotMessage, setScreenshotMessage] = React.useState('');
 
   let [departmentSelect, setDepartmentSelect] = React.useState('');
   let [fileType, setFileType] = React.useState('');
@@ -62,6 +70,7 @@ export default ({ wallet, departments }) => {
 
   function closeModal() {
     setIsOpen(false);
+    setUploadSent(false);
   }
 
   function submit() {
@@ -73,6 +82,12 @@ export default ({ wallet, departments }) => {
     if (!description) setDescValid(false);
 
     if (!source) setSourceValid(false);
+
+    var expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/gi;
+    var regex = new RegExp(expression);
+    if (!source.match(regex)) {
+      setSourceValid(false);
+    }
 
     if (!departmentSelect) setDepartmentValid(false);
 
@@ -103,7 +118,86 @@ export default ({ wallet, departments }) => {
       isScreenshotValid &&
       walletDisclaimer
     ){
-      console.log('success: : ', data);
+      console.log('success: : ', data, wallet);
+
+      axios.post('https://aletheia-alexandria.herokuapp.com/alexandrias', {
+        "title": data.title,
+        "description": data.description,
+        "source_url": data.source,
+        "status": "under_review",
+        "department": data.departmentSelect,
+        "type": data.fileType,
+        "wallet_address": wallet,
+        "api_enabled": false
+      })
+      .then(function (response) {
+        console.log(response);
+
+        const item_id = response.data.id;
+        /*
+        aletheias: []
+        api_enabled: false
+        createdAt: "2021-11-15T11:59:59.887Z"
+        department: {_id: '60d4e0ab820c5a0777ee98d5', url: 'https://www.ministeriodeeducacion.gob.do/', name: 'Ministerio de Educación de la República Dominicana (MINERD)', published_at: '2021-06-24T19:44:47.512Z', createdAt: '2021-06-24T19:44:43.624Z', …}
+        description: "Test 1"
+        file: []
+        id: "61924bbfa3de2f00166229a4"
+        published_at: "2021-11-15T11:59:59.884Z"
+        source_url: "Test 3"
+        status: "under_review"
+        title: "Test 1"
+        type: "csv"
+        updatedAt: "2021-11-15T11:59:59.895Z"
+        */
+
+        const dataForm = new FormData()
+        dataForm.append('files', data.fileUpload);
+        dataForm.append('ref', 'alexandria');
+        dataForm.append('refId', item_id);
+        dataForm.append('field', 'file');
+
+        axios.post ("https://aletheia-alexandria.herokuapp.com/upload",
+        dataForm,
+        {
+          headers: {
+              'Content-Type': 'multipart/form-data',
+          }
+        }).then(function (upload) {
+
+          console.log('uploaded file', upload);
+
+          const screenForm = new FormData()
+          screenForm.append('files', data.fileScreenshot);
+          screenForm.append('ref', 'alexandria');
+          screenForm.append('refId', item_id);
+          screenForm.append('field', 'proof');
+          
+          axios.post ("https://aletheia-alexandria.herokuapp.com/upload",
+          screenForm,
+          {
+              headers: {
+                  'Content-Type': 'multipart/form-data',
+              }
+          }).then(function (response) {
+            const screenUploaded = response.data[0];
+
+            console.log('uploaded screenshot', screenUploaded);
+
+            setUploadSent(true);
+            
+          }).catch(function (error) {
+            console.log(error);
+          });
+        
+        }).catch(function (error) {
+          console.log(error);
+        });
+        
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
     } else {
       console.log('error: ', data);
     }
@@ -147,7 +241,7 @@ export default ({ wallet, departments }) => {
       isDragAccept,
       isDragReject
     } = useDropzone({
-      accept: '*.csv, *.xls, *.pdf'
+      accept: 'text/csv, application/pdf, .xlsx, application/json, .txt'
     });
   
     const style = useMemo(() => ({
@@ -162,8 +256,12 @@ export default ({ wallet, departments }) => {
     ]);
   
     const acceptedFileItems = acceptedFiles.map(file => {
+      
       setUpload(file);
       setUploadValid(true);
+      setUploadError(false);
+      setUploadErrorMessage('');
+
       return (
         <li key={file.path}>
           {file.path} - {file.size} bytes
@@ -172,25 +270,34 @@ export default ({ wallet, departments }) => {
     });
   
     const fileRejectionItems = fileRejections.map(({ file, errors }) => {
+      
       setUpload(file);
       setUploadValid(false);
+      setUploadError(true);
+      setUploadErrorMessage(errors);
+
       return (
         <li key={file.path}>
           {file.path} - {file.size} bytes
           <ul>
-            {errors.map(e => (
-              <li key={e.code}>{e.message}</li>
-            ))}
+            { 
+              errors.map(e => {
+                
+                return (
+                  <li key={e.code}>Message: {e.message}</li>
+                )
+              })
+            }
           </ul>
         </li>
       )
     });
 
-    console.log(fileRejectionItems.length, acceptedFileItems.length);
+    // console.log(fileUpload, isUploadValid);
 
     return (
       <section className="container">
-        <div {...getRootProps({ style, className: `dropzone ${props.valid ? '' : 'error'}` })}>
+        <div {...getRootProps({ style, className: `dropzone ${fileUploadError ? 'error' : ''}` })}>
           <input {...getInputProps()} />
           {
             !fileUpload &&
@@ -200,22 +307,37 @@ export default ({ wallet, departments }) => {
             </div>
           }
           {
-            fileUpload &&
+            fileUpload && !fileUploadError &&
             <div>
               <p>File Uploaded</p>
               <div>
                 <h4>Accepted files</h4>
-                <ul>{acceptedFileItems}</ul>
+                <ul>
+                  <li key={fileUpload.path}>
+                    {fileUpload.path} - {fileUpload.size} bytes
+                  </li>
+                </ul>
               </div>
             </div>
           }
           {
-            fileRejectionItems.length > 0 &&
+            fileUploadError &&
             <div>
               <p>Uploading Failed</p>
               <div>
                 <h4>Rejected files</h4>
-                <ul>{fileRejectionItems}</ul>
+                <ul>
+                  <li key={fileUpload.path}>
+                    {fileUpload.path} - {fileUpload.size} bytes
+                  </li>
+                </ul>
+                { 
+                  fileUploadErrorMessage.map(e => {
+                    return (
+                      <p key={e.code}>{e.message}</p>
+                    )
+                  })
+                }
               </div>
             </div>
           }
@@ -224,7 +346,7 @@ export default ({ wallet, departments }) => {
     );  
   }
 
-  function UploadProof(props) {
+  function UploadProof (props) {
     const {
       getRootProps,
       getInputProps,
@@ -234,7 +356,7 @@ export default ({ wallet, departments }) => {
       isDragAccept,
       isDragReject
     } = useDropzone({
-      accept: 'image/jpeg, image/png'
+      accept: 'image/jpeg, image/jpg, image/png'
     });
   
     const style = useMemo(() => ({
@@ -249,8 +371,12 @@ export default ({ wallet, departments }) => {
     ]);
   
     const acceptedFileItems = acceptedFiles.map(file => {
-      isScreenshotValid = true;
-      fileScreenshot = file;
+      
+      setScreenshot(file);
+      setScreenshotValid(true);
+      setScreenshotError(false);
+      setScreenshotMessage('');
+
       return (
         <li key={file.path}>
           {file.path} - {file.size} bytes
@@ -258,45 +384,76 @@ export default ({ wallet, departments }) => {
       )
     });
   
-    const fileRejectionItems = fileRejections.map(({ file, errors }) => (
-      <li key={file.path}>
-        {file.path} - {file.size} bytes
-        <ul>
-          {errors.map(e => (
-            <li key={e.code}>{e.message}</li>
-          ))}
-        </ul>
-      </li>
-    ));
+    const fileRejectionItems = fileRejections.map(({ file, errors }) => {
+      
+      setScreenshot(file);
+      setScreenshotValid(false);
+      setScreenshotError(true);
+      setScreenshotMessage(errors);
+
+      return (
+        <li key={file.path}>
+          {file.path} - {file.size} bytes
+          <ul>
+            { 
+              errors.map(e => {
+                
+                return (
+                  <li key={e.code}>Message: {e.message}</li>
+                )
+              })
+            }
+          </ul>
+        </li>
+      )
+    });
+
+    // console.log(fileScreenshot, isScreenshotValid);
 
     return (
       <section className="container">
-        <div {...getRootProps({ style, className: `dropzone ${props.valid ? '' : 'error'}` })}>
+        <div {...getRootProps({ style, className: `dropzone ${fileScreenshotError ? 'error' : ''}` })}>
           <input {...getInputProps()} />
           {
-            !fileUpload &&
+            !fileScreenshot &&
             <div>
               <p>Screenshot de la fuente</p>
               <em>(Solo se aceptarán imágenes * .jpeg y * .png - asegurate que se vea el dia y la hora)</em>
             </div>
           }
           {
-            fileUpload &&
+            fileScreenshot && !fileScreenshotError &&
             <div>
-              <p>Screenshot Uploaded</p>
+              <p>File Uploaded</p>
               <div>
                 <h4>Accepted files</h4>
-                <ul>{acceptedFileItems}</ul>
+                <ul>
+                  <li key={fileScreenshot.path}>
+                    {fileScreenshot.path} - {fileScreenshot.size} bytes
+                  </li>
+                </ul>
               </div>
             </div>
           }
           {
-            fileRejectionItems.length > 0 &&
+            fileScreenshotError &&
             <div>
-              <p>Screenshot Failed</p>
+              <p>Uploading Failed</p>
               <div>
                 <h4>Rejected files</h4>
-                <ul>{fileRejectionItems}</ul>
+                <ul>
+                  <li key={fileScreenshot.path}>
+                    {fileScreenshot.path} - {fileScreenshot.size} bytes
+                  </li>
+                </ul>
+                { 
+                  fileScreenshotMessage.map(e => {
+                    
+                    return (
+                      <p key={e.code}>{e.message}</p>
+                    )
+                  })
+                }
               </div>
             </div>
           }
@@ -378,6 +535,9 @@ export default ({ wallet, departments }) => {
                 id="source" 
                 label="Fuente" 
                 error={ !isSourceValid } 
+                type="url"
+                placeholder="https://example.com"
+                size="30"
                 variant="filled" 
                 helperText="Ingrese aqui la fuente (URL) del documento" 
                 value={source}

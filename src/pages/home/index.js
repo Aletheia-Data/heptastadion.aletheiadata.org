@@ -198,7 +198,7 @@ export default function Home() {
 
   const selectDepartment = (e) =>{
     console.log(e, latest);
-    let new_items = all.filter( i => i.department.id === e);
+    let new_items = all.filter( i => i.department?.id === e);
     setLatest(new_items);
     console.log(latest);
     setOpenSearch(false);
