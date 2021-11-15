@@ -4,6 +4,14 @@
   align-items: center;
 }
 
+.metamask{
+  position: absolute;
+  top: 0;
+  text-align: center;
+  width: 100%;
+  padding-top: 20px;  
+}
+
 .menu .btn{
   background: #6474c2;
   border: 0;

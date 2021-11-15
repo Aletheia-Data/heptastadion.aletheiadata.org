@@ -269,6 +269,9 @@ export default function Home() {
         
         <main className="main-wrap page__folder">
           <header className="listing-header">
+            <div className="metamask">
+              Whant to help? Download a crypto wallet to help us out.<br />we recommend using <b><a href="https://metamask.io/" target="_blank">Metamask</a></b>
+            </div>
             <div className="logo">
               <div className="listing-links">
                 {/* <a className="codrops-icon codrops-icon--prev" href="" title="Previous Demo"><svg className="icon icon--arrow"><use xlinkHref="#icon-arrow"></use></svg></a> */}
