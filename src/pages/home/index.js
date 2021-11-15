@@ -61,13 +61,13 @@ export default function Home() {
       const netId = await web3.eth.net.getId()
       const accounts = await web3.eth.getAccounts()
 
-      console.log(web3, accounts);
+      // console.log(web3, accounts);
 
       //load balance
       if(accounts[0] && typeof accounts[0] !=='undefined'){
         const balance = await web3.eth.getBalance(accounts[0])
 
-        console.log('check accounts: ', accounts);
+        // console.log('check accounts: ', accounts);
 
         setConnected(true);
         setBalance(balance);
@@ -95,7 +95,7 @@ export default function Home() {
     return fetch(`${endpoint_admin}/alexandrias`)
     .then(response => response.json())
     .then(data => {
-      console.log(data)
+      // console.log(data)
       if (data.length > 0){
         setLatest(data);
         setAll(data);
@@ -109,7 +109,7 @@ export default function Home() {
     return fetch(`${endpoint_admin}/departments`)
     .then(response => response.json())
     .then(data => {
-      console.log(data)
+      // console.log(data)
       if (data.length > 0){
         setDepartments(data);
       }

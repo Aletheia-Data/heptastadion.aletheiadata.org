@@ -79,7 +79,7 @@ export default function Search() {
           // add meta
           let filters = document.getElementById('filters');
           var filters_html = document.createElement('filters_html'); // is a node
-          console.log(response_index.meta);
+          // console.log(response_index.meta);
           filters_html.innerHTML = `<div>
             <div className="records-imported"></div>
             <div className="records-error"></div>
@@ -163,7 +163,7 @@ export default function Search() {
     if (e.key === 'Enter') {
       setOpenSearch(false);
       let res = miniSearch.search(search);
-      console.log('setting query result: ', res);
+      // console.log('setting query result: ', res);
 
       setResults(res);
       if (res.length > 0){
@@ -412,7 +412,7 @@ export default function Search() {
       }
       
       // setResults(results)
-      console.log(results.length);
+      // console.log(results.length);
       setResultsPerPage(res);
       
       if (page == 1) {
@@ -446,7 +446,7 @@ export default function Search() {
   }
 
   const viewFile = (url) =>{
-    console.log(`_view?url=${file}`);
+    // console.log(`_view?url=${file}`);
     history.push(`_view?url=${file}`);
   }
 

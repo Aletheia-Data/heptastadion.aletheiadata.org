@@ -140,7 +140,7 @@ export default ({ wallet, departments }) => {
       walletDisclaimer
     ){
 
-      console.log('success: : ', data, wallet);
+      // console.log('success: : ', data, wallet);
       setLoading(true);
 
       axios.post('https://aletheia-alexandria.herokuapp.com/alexandrias', {
@@ -154,7 +154,7 @@ export default ({ wallet, departments }) => {
         "api_enabled": false
       })
       .then(function (response) {
-        console.log(response);
+         //console.log(response);
 
         const item_id = response.data.id;
         
@@ -172,7 +172,7 @@ export default ({ wallet, departments }) => {
           }
         }).then(function (upload) {
 
-          console.log('uploaded file', upload);
+          // console.log('uploaded file', upload);
 
           const screenForm = new FormData()
           screenForm.append('files', data.fileScreenshot);
@@ -189,7 +189,7 @@ export default ({ wallet, departments }) => {
           }).then(function (response) {
             const screenUploaded = response.data[0];
 
-            console.log('uploaded screenshot', screenUploaded);
+            // console.log('uploaded screenshot', screenUploaded);
 
             setLoading(false);
 
