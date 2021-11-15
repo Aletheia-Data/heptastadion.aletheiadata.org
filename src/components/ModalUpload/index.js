@@ -310,14 +310,15 @@ export default ({ wallet, departments }) => {
     // console.log(fileUpload, isUploadValid);
 
     return (
-      <section className="container">
+      <section className="container modalUpload">
         <div {...getRootProps({ style, className: `dropzone ${fileUploadError ? 'error' : ''}` })}>
           <input {...getInputProps()} />
           {
             !fileUpload &&
             <div>
-              <p>Archivo que decea compartir</p>
-              <em>(Solo se aceptarán archivos integrales de fuentes verificables y oficiales)</em>
+              <p>Archivo que desea compartir</p>
+              <p>(Solo se aceptarán archivos integrales de fuentes verificables y oficiales)</p>
+              <br /><sup>------- Preferible .CSV --------</sup>
             </div>
           }
           {
@@ -425,14 +426,15 @@ export default ({ wallet, departments }) => {
     // console.log(fileScreenshot, isScreenshotValid);
 
     return (
-      <section className="container">
+      <section className="container modalUpload">
         <div {...getRootProps({ style, className: `dropzone ${fileScreenshotError ? 'error' : ''}` })}>
           <input {...getInputProps()} />
           {
             !fileScreenshot &&
             <div>
               <p>Screenshot de la fuente</p>
-              <em>(Solo se aceptarán imágenes * .jpeg y * .png - asegurate que se vea el dia y la hora)</em>
+              <p>(Solo se aceptarán imágenes * .jpeg y * .png - asegurate que se vea el dia y la hora)</p>
+              <br /><sup>------- Asegúrate que sea visible fecha y hora --------</sup>
             </div>
           }
           {
