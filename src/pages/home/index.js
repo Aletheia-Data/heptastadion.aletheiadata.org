@@ -395,10 +395,10 @@ export default function Home() {
                   Made by 👨‍💻 who believe in a better world
                   <br /><br />
                   <a 
-                    href="https://gitcoin.co/grants/3179/aletheia-data"
+                    href="https://opencollective.com/aletheia-data"
                     target="_blank"
                   >
-                    <b>Donate to wallet</b>
+                    <b>Donate</b>
                   </a>
             </div>
           </div>
