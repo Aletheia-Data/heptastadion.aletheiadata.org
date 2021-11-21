@@ -433,7 +433,7 @@ export default ({ wallet, departments }) => {
             !fileScreenshot &&
             <div>
               <p>Screenshot de la fuente</p>
-              <p>(Solo se aceptarán imágenes * .jpeg y * .png - asegurate que se vea el dia y la hora)</p>
+              <p>(Solo se aceptarán imágenes * .jpeg y * .png - asegurate que sea visible la fecha y la hora)</p>
               <br /><sup>------- Asegúrate que sea visible fecha y hora --------</sup>
             </div>
           }
@@ -620,7 +620,7 @@ export default ({ wallet, departments }) => {
               <FormControlLabel className={ isWalletDiscValid ? 'valid' : 'error' } control={<Checkbox value={walletDisclaimer} onChange={()=>{
                   setWalletDiscValid(!walletDisclaimer);
                   setWalletDisclaimer(!walletDisclaimer)
-                }} />} label="Confirmo que es dirección de Wallet. Acepto que no podré cambiarlo en el futuro." />
+                }} />} label="Confirmo que esta dirección de Wallet es correcta. Acepto que no podré cambiarlo en el futuro." />
 
 
             </FormGroup>
