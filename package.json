@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@appbaseio/reactivesearch": "^3.11.8", 
+    "@appbaseio/reactivesearch": "^3.11.8",
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
     "@handsontable/react": "^9.0.1",

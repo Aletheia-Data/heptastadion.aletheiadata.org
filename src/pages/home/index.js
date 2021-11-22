@@ -392,7 +392,7 @@ export default function Home() {
               </div>
             </div>
             <div className="copyright">
-                  Made by 👨‍💻 who believe in a better world
+                  Made by 👨‍💻 who believe in a better world - <a href="https://aletheiadata.statuspage.io/" target="_blank"><img style={{ width: '20px', marginRight: '10px' }} src="./assets/img/icons/statuspage-logo.png" />Status</a>
                   <br /><br />
                   <a 
                     href="https://opencollective.com/aletheia-data"
