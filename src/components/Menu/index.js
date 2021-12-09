@@ -21,7 +21,7 @@ export default ({ departments, select }) => {
           fixedHeight : 150,
           focus       : 'center',
         } }
-        onMoved={ ( splide, newIndex ) => { currentItem = newIndex; console.log( 'moved', currentItem ) } }
+        onMoved={ ( splide, newIndex ) => { currentItem = newIndex; } }
       >
         {
           departments.map((item, key) => {

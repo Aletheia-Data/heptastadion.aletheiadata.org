@@ -52,6 +52,10 @@ export default function Home() {
     }
   }
 
+  const endpoint_api_version = process.env.REACT_APP_API_VERSION;
+  const endpoint_admin = process.env.REACT_APP_ADMIN_ENDPOINT;
+  const rapid_endpoint = process.env.REACT_APP_RAPID_API_ENDPOINT;
+
   // init web3 if available
   const initWeb3 = async () =>{
     if(typeof window.ethereum!=='undefined'){
@@ -91,7 +95,6 @@ export default function Home() {
 
   const getListing = () =>{
     setLoading(true);
-    let endpoint_admin = 'https://aletheia-alexandria.herokuapp.com';
     return fetch(`${endpoint_admin}/alexandrias`)
     .then(response => response.json())
     .then(data => {
@@ -104,8 +107,7 @@ export default function Home() {
     });
   }
 
-  const getDepartment = () =>{
-    let endpoint_admin = 'https://aletheia-alexandria.herokuapp.com';
+  const getDepartments = () =>{
     return fetch(`${endpoint_admin}/departments`)
     .then(response => response.json())
     .then(data => {
@@ -116,16 +118,25 @@ export default function Home() {
     });
   }
 
+
+  const getDepartment = (id) =>{
+    return fetch(`${endpoint_admin}/departments/${id}`)
+    .then(response => response.json())
+    .then(data => {
+      return data;
+    });
+  }
+
   useEffect(()=>{
     getListing();
-    getDepartment();
+    getDepartments();
     initWeb3();
   }, [])
 
   const Card = (result, i) =>{
 
-    const api_host = 'https://api-aletheiadata.herokuapp.com';
-    const api_endpoint = 'https://rapidapi.com/aletheia-data-aletheia-data-default/api/aletheia2';
+    const api_host = process.env.REACT_APP_API_HOST;
+    const api_endpoint = process.env.REACT_APP_RAPID_API_ENDPOINT;
     
     return(
       <div className="card" key={`card_${i}}`}>
@@ -197,10 +208,14 @@ export default function Home() {
   }
 
   const selectDepartment = (e) =>{
-    console.log(e, latest);
-    let new_items = all.filter( i => i.department?.id === e);
-    setLatest(new_items);
-    console.log(latest);
+    getDepartment(e)
+    .then(data => {
+      if (data.alexandrias){
+        setLatest(data.alexandrias)
+      } else {
+        setLatest([]);
+      }
+    })
     setOpenSearch(false);
     // results
   }

@@ -4,14 +4,19 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+require('dotenv').config()
+
 let version = `
   ********************************
   ********************************
   ***** SEARCH ALETHEIADATA ******
-  ************ v${'0.0.1'} **********
+  ** ENDPOINT: ${process.env.REACT_APP_ADMIN_ENDPOINT} *******************
+  ** VERSION: ${process.env.REACT_APP_API_VERSION} *******************
+  ** RAPID_API_ENDPOINT: ${process.env.REACT_APP_RAPID_API_ENDPOINT} ****************
   ********************************
   ********************************
   `;
+
   console.log(version);
 
 if (window.location.host !== 'localhost:3000'){

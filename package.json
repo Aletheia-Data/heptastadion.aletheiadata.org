@@ -16,7 +16,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.24.0",
-    "dotenv": "^8.2.0",
+    "dotenv": "^8.6.0",
     "emotion": "^10.0.27",
     "handsontable": "^9.0.1",
     "minisearch": "^3.0.3",
