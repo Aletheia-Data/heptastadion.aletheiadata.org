@@ -33,7 +33,7 @@ The app is a React app built with [Node](https://www.npmjs.com/).
 To start local development:
 
 ```bash
-git clone git@github.com:Aletheia-Data/app.aletheiadata.org.git
+git clone git@github.com:Aletheia-Data/heptastadion.aletheiadata.org.git
 
 # when using nvm to manage Node.js versions
 nvm use
@@ -68,16 +68,6 @@ npm run lint
 npm run format
 ```
 
-## 🛳 Build
-
-To create a production build, run from the root of the project:
-
-```bash
-npm run build
-
-# serve production build
-npm run serve
-```
 ## 💖 Contributing
 
 We welcome contributions in form of bug reports, feature requests, code changes, or documentation improvements.
